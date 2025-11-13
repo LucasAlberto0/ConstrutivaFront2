@@ -1,0 +1,47 @@
+<div class="manutencao-list-container">
+  <h3>Manutenção Mensal</h3>
+
+  <div *ngIf="loading" class="loading-message">Processando...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="manutencao-form">
+    <h4>Adicionar Nova Manutenção</h4>
+    <form (ngSubmit)="addManutencao()">
+      <div class="form-group">
+        <label for="dataInicio">Data de Início</label>
+        <input type="date" id="dataInicio" name="dataInicio" [(ngModel)]="newManutencao.dataInicio" required>
+      </div>
+      <div class="form-group">
+        <label for="dataTermino">Data de Término</label>
+        <input type="date" id="dataTermino" name="dataTermino" [(ngModel)]="newManutencao.dataTermino" required>
+      </div>
+      <div class="form-group">
+        <label for="imagemUrl">URL da Imagem (Opcional)</label>
+        <input type="text" id="imagemUrl" name="imagemUrl" [(ngModel)]="newManutencao.imagemUrl">
+      </div>
+      <div class="form-group">
+        <label for="datasManutencao">Datas das Manutenções (Ex: 01/01, 15/01)</label>
+        <input type="text" id="datasManutencao" name="datasManutencao" [(ngModel)]="newManutencao.datasManutencao">
+      </div>
+      <button type="submit" class="btn-add">Adicionar Manutenção</button>
+    </form>
+  </div>
+
+  <div *ngIf="manutencoes && manutencoes.length > 0" class="manutencoes-display">
+    <h4>Manutenções Registradas</h4>
+    <ul>
+      <li *ngFor="let manutencao of manutencoes">
+        <span>
+          De {{ manutencao.dataInicio | date:'shortDate' }} até {{ manutencao.dataTermino | date:'shortDate' }}
+          <span *ngIf="manutencao.datasManutencao"> (Datas: {{ manutencao.datasManutencao }})</span>
+          <span *ngIf="manutencao.imagemUrl"> | <a [href]="manutencao.imagemUrl" target="_blank">Ver Imagem</a></span>
+        </span>
+        <button (click)="deleteManutencao(manutencao.id)" class="btn-delete">Excluir</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!manutencoes || manutencoes.length === 0 && !loading" class="no-data-message">
+    Nenhuma manutenção registrada para esta obra.
+  </div>
+</div>

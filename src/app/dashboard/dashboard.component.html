@@ -1,0 +1,51 @@
+<div class="dashboard-container">
+  <h2>Dashboard</h2>
+
+  <div *ngIf="loading" class="loading-message">Loading dashboard data...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div *ngIf="dashboardSummary && !loading" class="summary-cards">
+    <div class="card">
+      <h3>Total de Obras</h3>
+      <p>{{ dashboardSummary.totalObras }}</p>
+    </div>
+    <div class="card">
+      <h3>Em Andamento</h3>
+      <p>{{ dashboardSummary.obrasEmAndamento }}</p>
+    </div>
+    <div class="card">
+      <h3>Em Manutenção</h3>
+      <p>{{ dashboardSummary.obrasEmManutencao }}</p>
+    </div>
+    <div class="card">
+      <h3>Suspensas</h3>
+      <p>{{ dashboardSummary.obrasSuspensas }}</p>
+    </div>
+    <div class="card">
+      <h3>Finalizadas</h3>
+      <p>{{ dashboardSummary.obrasFinalizadas }}</p>
+    </div>
+  </div>
+
+  <ng-container *ngIf="dashboardSummary?.obrasRecentes as obrasRecentes">
+    <div *ngIf="obrasRecentes.length > 0" class="recent-works">
+      <h3>Obras Recentes</h3>
+      <div class="work-list">
+        <div *ngFor="let obra of obrasRecentes" class="work-item">
+          <h4>{{ obra.nome }}</h4>
+          <p>Localização: {{ obra.localizacao }}</p>
+          <p>Status: {{ getStatusName(obra.status) }}</p>
+          <p>Início: {{ obra.dataInicio | date:'shortDate' }}</p>
+          <p>Término: {{ obra.dataTermino | date:'shortDate' }}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="obrasRecentes.length === 0 && !loading" class="no-data-message">
+      Nenhuma obra recente para exibir.
+    </div>
+  </ng-container>
+
+  <div *ngIf="!dashboardSummary?.obrasRecentes && !loading" class="no-data-message">
+    Nenhuma obra recente para exibir.
+  </div>
+</div>

@@ -1,0 +1,146 @@
+.dashboard-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #e53935; // Red
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.loading-message, .error-message, .no-data-message {
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.loading-message {
+  background-color: #e0f2f7; // Light blue
+  color: #0277bd;
+}
+
+.error-message {
+  background-color: #ffebee; // Light red
+  color: #c62828;
+}
+
+.no-data-message {
+  background-color: #f5f5f5;
+  color: #757575;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); // Responsive grid
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #e53935; // Red
+  font-size: 1rem;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.recent-works {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.recent-works h3 {
+  color: #e53935; // Red
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.work-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.work-item {
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.work-item:hover {
+  background-color: #f0f0f0;
+}
+
+.work-item h4 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.work-item p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 320px) {
+  .dashboard-container {
+    padding: 0.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr; // Stack cards on very small screens
+  }
+
+  .card h3 {
+    font-size: 0.9rem;
+  }
+
+  .card p {
+    font-size: 1.2rem;
+  }
+
+  .recent-works {
+    padding: 1rem;
+  }
+
+  .work-item h4 {
+    font-size: 1rem;
+  }
+
+  .work-item p {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,83 @@
+<div class="diario-list-container">
+  <h3>Diário de Obra</h3>
+
+  <div *ngIf="loading" class="loading-message">Processando...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="diario-form">
+    <h4>Adicionar Novo Diário</h4>
+    <form (ngSubmit)="addDiario()">
+      <div class="form-group">
+        <label for="data">Data</label>
+        <input type="date" id="data" name="data" [(ngModel)]="newDiario.data" required>
+      </div>
+      <div class="form-group">
+        <label for="clima">Clima</label>
+        <input type="text" id="clima" name="clima" [(ngModel)]="newDiario.clima">
+      </div>
+      <div class="form-group">
+        <label for="colaboradores">Colaboradores</label>
+        <input type="text" id="colaboradores" name="colaboradores" [(ngModel)]="newDiario.colaboradores">
+      </div>
+      <div class="form-group">
+        <label for="atividades">Atividades</label>
+        <textarea id="atividades" name="atividades" [(ngModel)]="newDiario.atividades"></textarea>
+      </div>
+      <button type="submit" class="btn-add">Adicionar Diário</button>
+    </form>
+  </div>
+
+  <div *ngIf="diarios && diarios.length > 0" class="diarios-display">
+    <h4>Diários Registrados</h4>
+    <ul>
+      <li *ngFor="let diario of diarios">
+        <span>{{ diario.data | date:'shortDate' }} - Clima: {{ diario.clima }}</span>
+        <div>
+          <button (click)="viewDiarioDetails(diario.id)" class="btn-view">Ver Detalhes</button>
+          <button (click)="deleteDiario(diario.id)" class="btn-delete">Excluir</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!diarios || diarios.length === 0 && !loading" class="no-data-message">
+    Nenhum diário de obra registrado para esta obra.
+  </div>
+
+  <!-- Diario Details Modal/Section -->
+  <div *ngIf="currentDiarioDetalhes" class="diario-details-modal">
+    <div class="modal-content">
+      <button class="close-button" (click)="closeDiarioDetails()">X</button>
+      <h4>Detalhes do Diário de {{ currentDiarioDetalhes.data | date:'shortDate' }}</h4>
+      <p><strong>Clima:</strong> {{ currentDiarioDetalhes.clima }}</p>
+      <p><strong>Colaboradores:</strong> {{ currentDiarioDetalhes.colaboradores }}</p>
+      <p><strong>Atividades:</strong> {{ currentDiarioDetalhes.atividades }}</p>
+
+      <h5>Fotos</h5>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="newFotoUrl" placeholder="URL da nova foto">
+        <button (click)="addFoto(currentDiarioDetalhes.id)" class="btn-add-small">Adicionar Foto</button>
+      </div>
+      <div class="photos-grid">
+        <div *ngFor="let foto of currentDiarioDetalhes.fotos" class="photo-item">
+          <img [src]="foto.url" alt="Foto do Diário">
+          <button (click)="deleteFoto(currentDiarioDetalhes.id, foto.id)" class="btn-delete-small">X</button>
+        </div>
+      </div>
+      <p *ngIf="!currentDiarioDetalhes.fotos || currentDiarioDetalhes.fotos.length === 0">Nenhuma foto.</p>
+
+      <h5>Comentários</h5>
+      <div class="form-group">
+        <textarea [(ngModel)]="newComentarioTexto" placeholder="Novo comentário"></textarea>
+        <button (click)="addComentario(currentDiarioDetalhes.id)" class="btn-add-small">Adicionar Comentário</button>
+      </div>
+      <ul>
+        <li *ngFor="let comentario of currentDiarioDetalhes.comentarios">
+          <span><strong>{{ comentario.autorNome }}</strong> ({{ comentario.data | date:'short' }}): {{ comentario.texto }}</span>
+          <button (click)="deleteComentario(currentDiarioDetalhes.id, comentario.id)" class="btn-delete-small">X</button>
+        </li>
+      </ul>
+      <p *ngIf="!currentDiarioDetalhes.comentarios || currentDiarioDetalhes.comentarios.length === 0">Nenhum comentário.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="obra-detail-container">
+  <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
+  <h2>Detalhes da Obra</h2>
+
+  <div *ngIf="loading" class="loading-message">Carregando detalhes da obra...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div *ngIf="obra && !loading" class="obra-details-card">
+    <div class="detail-section">
+      <h3>Dados Básicos</h3>
+      <p><strong>Nome:</strong> {{ obra.nome }}</p>
+      <p><strong>Localização:</strong> {{ obra.localizacao }}</p>
+      <p><strong>Contratante:</strong> {{ obra.contratante }}</p>
+      <p><strong>Contrato:</strong> {{ obra.contrato }}</p>
+      <p><strong>Ordem de Início de Serviço:</strong> {{ obra.ordemInicioServico }}</p>
+      <p><strong>Coordenador:</strong> {{ obra.coordenadorNome }}</p>
+      <p><strong>Administrador:</strong> {{ obra.administradorNome }}</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Responsáveis</h3>
+      <p><strong>Responsável Técnico:</strong> {{ obra.responsavelTecnicoNome }}</p>
+      <p><strong>Equipe:</strong> {{ obra.equipe }}</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Status dos Serviços</h3>
+      <p><strong>Data de Início:</strong> {{ obra.dataInicio | date:'shortDate' }}</p>
+      <p><strong>Data de Término:</strong> {{ obra.dataTermino | date:'shortDate' }}</p>
+      <p><strong>Status:</strong> {{ getStatusName(obra.status) }}</p>
+    </div>
+
+    <div class="detail-section">
+      <app-aditivo-list
+        [obraId]="obra.id!"
+        [aditivos]="obra.aditivos || []"
+        (aditivoAdded)="refreshAditivos()"
+        (aditivoDeleted)="refreshAditivos()">
+      </app-aditivo-list>
+    </div>
+
+    <div class="detail-section">
+      <app-manutencao-list
+        [obraId]="obra.id!"
+        [manutencoes]="obra.manutencoes || []"
+        (manutencaoAdded)="refreshManutencoes()"
+        (manutencaoDeleted)="refreshManutencoes()">
+      </app-manutencao-list>
+    </div>
+
+    <div class="detail-section">
+      <app-diario-list
+        [obraId]="obra.id!"
+        [diarios]="obra.diariosObra || []"
+        (diarioAdded)="refreshDiarios()"
+        (diarioDeleted)="refreshDiarios()">
+      </app-diario-list>
+    </div>
+
+    <div class="detail-section">
+      <app-documento-list
+        [obraId]="obra.id!"
+        [documentos]="obra.documentos || []"
+        (documentoAdded)="refreshDocumentos()"
+        (documentoDeleted)="refreshDocumentos()">
+      </app-documento-list>
+    </div>
+
+    <div class="detail-section">
+      <app-checklist-list
+        [obraId]="obra.id!"
+        [checklists]="obra.checklists || []"
+        (checklistAdded)="refreshChecklists()"
+        (checklistDeleted)="refreshChecklists()">
+      </app-checklist-list>
+    </div>
+  </div>
+</div>

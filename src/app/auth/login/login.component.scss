@@ -1,0 +1,86 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5; // Light gray background
+  font-family: Arial, sans-serif;
+}
+
+.login-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 320px; // Responsive up to 320px
+  box-sizing: border-box; // Include padding in width
+}
+
+.logo {
+  width: 100px; // Adjust as needed
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-weight: bold;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #e53935; // Red color
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-login:hover {
+  background-color: #c62828; // Darker red on hover
+}
+
+.error-message {
+  color: #e53935;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 1rem;
+  color: #e53935;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}

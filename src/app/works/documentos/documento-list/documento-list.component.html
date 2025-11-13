@@ -1,0 +1,45 @@
+<div class="documento-list-container">
+  <h3>Documentos da Obra</h3>
+
+  <div *ngIf="loading" class="loading-message">Processando...</div>
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="documento-form">
+    <h4>Adicionar Novo Documento</h4>
+    <form (ngSubmit)="addDocumento()">
+      <div class="form-group">
+        <label for="nomeArquivo">Nome do Arquivo</label>
+        <input type="text" id="nomeArquivo" name="nomeArquivo" [(ngModel)]="newDocumento.nomeArquivo" required>
+      </div>
+      <div class="form-group">
+        <label for="url">URL do Documento</label>
+        <input type="text" id="url" name="url" [(ngModel)]="newDocumento.url" required>
+      </div>
+      <div class="form-group">
+        <label for="pasta">Pasta</label>
+        <select id="pasta" name="pasta" [(ngModel)]="newDocumento.pasta">
+          <option *ngFor="let pastaOption of tipoPastaOptions" [ngValue]="pastaOption">
+            {{ getPastaName(pastaOption) }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn-add">Adicionar Documento</button>
+    </form>
+  </div>
+
+  <div *ngIf="documentos && documentos.length > 0" class="documentos-display">
+    <h4>Documentos Registrados</h4>
+    <ul>
+      <li *ngFor="let documento of documentos">
+        <span>
+          <a [href]="documento.url" target="_blank">{{ documento.nomeArquivo }}</a> ({{ getPastaName(documento.pasta) }})
+        </span>
+        <button (click)="deleteDocumento(documento.id)" class="btn-delete">Excluir</button>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="!documentos || documentos.length === 0 && !loading" class="no-data-message">
+    Nenhum documento registrado para esta obra.
+  </div>
+</div>
