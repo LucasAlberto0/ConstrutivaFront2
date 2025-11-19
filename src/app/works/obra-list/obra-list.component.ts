@@ -13,8 +13,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ObraListComponent implements OnInit {
   obras: ObraListagemDto[] = [];
+  filteredObras: ObraListagemDto[] = [];
   loading: boolean = true;
   error: string | null = null;
+  currentFilter: string = 'Todas';
 
   constructor(private obraService: ObraService) { }
 
@@ -27,7 +29,9 @@ export class ObraListComponent implements OnInit {
     this.obraService.getObras().subscribe({
       next: (data) => {
         this.obras = data;
+        this.filteredObras = [...this.obras]; // Initialize filteredObras with all obras
         this.loading = false;
+        this.filterObras('Todas'); // Apply initial filter
       },
       error: (err) => {
         this.error = 'Failed to load works.';
@@ -35,6 +39,15 @@ export class ObraListComponent implements OnInit {
         console.error('Error loading obras:', err);
       }
     });
+  }
+
+  filterObras(filter: string): void {
+    this.currentFilter = filter;
+    if (filter === 'Todas') {
+      this.filteredObras = [...this.obras];
+    } else {
+      this.filteredObras = this.obras.filter(obra => this.getStatusName(obra.status) === filter);
+    }
   }
 
   getStatusName(status: ObraStatus | undefined): string {

@@ -12,7 +12,7 @@ import { ChecklistListComponent } from '../checklists/checklist-list/checklist-l
 @Component({
   selector: 'app-obra-detail',
   standalone: true,
-  imports: [CommonModule, AditivoListComponent, ManutencaoListComponent, DiarioListComponent, DocumentoListComponent, ChecklistListComponent], // Add ChecklistListComponent to imports
+  imports: [CommonModule, ManutencaoListComponent, DiarioListComponent, DocumentoListComponent],
   templateUrl: './obra-detail.component.html',
   styleUrls: ['./obra-detail.component.scss']
 })
@@ -21,6 +21,7 @@ export class ObraDetailComponent implements OnInit {
   obra: ObraDetalhesDto | null = null;
   loading: boolean = true;
   error: string | null = null;
+  currentTab: string = 'Dados Básicos'; // Initialize currentTab
 
   constructor(
     private route: ActivatedRoute,
@@ -54,6 +55,10 @@ export class ObraDetailComponent implements OnInit {
         console.error('Error loading obra details:', err);
       }
     });
+  }
+
+  selectTab(tabName: string): void {
+    this.currentTab = tabName;
   }
 
   refreshAditivos(): void {

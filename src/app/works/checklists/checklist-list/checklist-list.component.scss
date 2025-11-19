@@ -7,17 +7,16 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  position: relative; // For modal positioning
+  position: relative;
 }
 
 h3 {
-  color: #e53935; // Red
-  margin-top: 0;
-  margin-bottom: 1.5rem;
+  color: #e53935;
+  margin: 0 0 1.5rem;
   text-align: center;
 }
 
-.loading-message, .error-message, .no-data-message {
+.message-base {
   text-align: center;
   padding: 0.8rem;
   border-radius: 4px;
@@ -25,16 +24,19 @@ h3 {
 }
 
 .loading-message {
+  @extend .message-base;
   background-color: #e0f2f7;
   color: #0277bd;
 }
 
 .error-message {
+  @extend .message-base;
   background-color: #ffebee;
   color: #c62828;
 }
 
 .no-data-message {
+  @extend .message-base;
   background-color: #f5f5f5;
   color: #757575;
 }
@@ -49,8 +51,7 @@ h3 {
 
 .checklist-form h4 {
   color: #333;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   text-align: center;
 }
 
@@ -74,21 +75,25 @@ h3 {
   font-size: 1rem;
 }
 
-.btn-add {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #e53935; // Red
-  color: #fff;
+.btn-base {
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.btn-add {
+  @extend .btn-base;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #e53935;
+  color: #fff;
+  font-size: 1rem;
   margin-top: 1rem;
 }
 
 .btn-add:hover {
-  background-color: #c62828; // Darker red
+  background-color: #c62828;
 }
 
 .checklists-display {
@@ -100,8 +105,7 @@ h3 {
 
 .checklists-display h4 {
   color: #333;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   text-align: center;
 }
 
@@ -123,13 +127,10 @@ h3 {
 }
 
 .btn-view {
-  background-color: #0277bd; // Blue for view
+  @extend .btn-base;
+  background-color: #0277bd;
   color: #fff;
-  border: none;
   padding: 0.5rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   font-size: 0.8rem;
   margin-right: 0.5rem;
 }
@@ -139,18 +140,15 @@ h3 {
 }
 
 .btn-delete {
-  background-color: #f44336; // Red for delete
+  @extend .btn-base;
+  background-color: #f44336;
   color: #fff;
-  border: none;
   padding: 0.5rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   font-size: 0.8rem;
 }
 
 .btn-delete:hover {
-  background-color: #d32f2f; // Darker red
+  background-color: #d32f2f;
 }
 
 /* Checklist Details Modal */
@@ -192,15 +190,13 @@ h3 {
 
 .modal-content h4 {
   color: #e53935;
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   text-align: center;
 }
 
 .modal-content h5 {
   color: #333;
-  margin-top: 1.5rem;
-  margin-bottom: 0.8rem;
+  margin: 1.5rem 0 0.8rem;
   border-bottom: 1px solid #eee;
   padding-bottom: 0.5rem;
 }
@@ -226,19 +222,20 @@ h3 {
   transform: scale(1.2);
 }
 
-.btn-add-small, .btn-delete-small {
+.btn-small-base {
   padding: 0.4rem 0.6rem;
   font-size: 0.75rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 0.5rem;
+  border: none;
 }
 
 .btn-add-small {
-  background-color: #4CAF50; // Green
+  @extend .btn-small-base;
+  background-color: #4CAF50;
   color: #fff;
-  border: none;
 }
 
 .btn-add-small:hover {
@@ -246,9 +243,9 @@ h3 {
 }
 
 .btn-delete-small {
-  background-color: #f44336; // Red
+  @extend .btn-small-base;
+  background-color: #f44336;
   color: #fff;
-  border: none;
 }
 
 .btn-delete-small:hover {

@@ -2,11 +2,20 @@
   <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
   <h2>Detalhes da Obra</h2>
 
+  <div class="tab-buttons">
+    <button (click)="selectTab('Dados Básicos')" [class.active]="currentTab === 'Dados Básicos'">Dados Básicos</button>
+    <button (click)="selectTab('Responsáveis')" [class.active]="currentTab === 'Responsáveis'">Responsáveis</button>
+    <button (click)="selectTab('Status')" [class.active]="currentTab === 'Status'">Status</button>
+    <button (click)="selectTab('Manutenção')" [class.active]="currentTab === 'Manutenção'">Manutenção</button>
+    <button (click)="selectTab('Diário')" [class.active]="currentTab === 'Diário'">Diário</button>
+    <button (click)="selectTab('Documentos')" [class.active]="currentTab === 'Documentos'">Documentos</button>
+  </div>
+
   <div *ngIf="loading" class="loading-message">Carregando detalhes da obra...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <div *ngIf="obra && !loading" class="obra-details-card">
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Dados Básicos'" class="detail-section">
       <h3>Dados Básicos</h3>
       <p><strong>Nome:</strong> {{ obra.nome }}</p>
       <p><strong>Localização:</strong> {{ obra.localizacao }}</p>
@@ -17,29 +26,20 @@
       <p><strong>Administrador:</strong> {{ obra.administradorNome }}</p>
     </div>
 
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Responsáveis'" class="detail-section">
       <h3>Responsáveis</h3>
       <p><strong>Responsável Técnico:</strong> {{ obra.responsavelTecnicoNome }}</p>
       <p><strong>Equipe:</strong> {{ obra.equipe }}</p>
     </div>
 
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Status'" class="detail-section">
       <h3>Status dos Serviços</h3>
       <p><strong>Data de Início:</strong> {{ obra.dataInicio | date:'shortDate' }}</p>
       <p><strong>Data de Término:</strong> {{ obra.dataTermino | date:'shortDate' }}</p>
       <p><strong>Status:</strong> {{ getStatusName(obra.status) }}</p>
     </div>
 
-    <div class="detail-section">
-      <app-aditivo-list
-        [obraId]="obra.id!"
-        [aditivos]="obra.aditivos || []"
-        (aditivoAdded)="refreshAditivos()"
-        (aditivoDeleted)="refreshAditivos()">
-      </app-aditivo-list>
-    </div>
-
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Manutenção'" class="detail-section">
       <app-manutencao-list
         [obraId]="obra.id!"
         [manutencoes]="obra.manutencoes || []"
@@ -48,7 +48,7 @@
       </app-manutencao-list>
     </div>
 
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Diário'" class="detail-section">
       <app-diario-list
         [obraId]="obra.id!"
         [diarios]="obra.diariosObra || []"
@@ -57,22 +57,13 @@
       </app-diario-list>
     </div>
 
-    <div class="detail-section">
+    <div *ngIf="currentTab === 'Documentos'" class="detail-section">
       <app-documento-list
         [obraId]="obra.id!"
         [documentos]="obra.documentos || []"
         (documentoAdded)="refreshDocumentos()"
         (documentoDeleted)="refreshDocumentos()">
       </app-documento-list>
-    </div>
-
-    <div class="detail-section">
-      <app-checklist-list
-        [obraId]="obra.id!"
-        [checklists]="obra.checklists || []"
-        (checklistAdded)="refreshChecklists()"
-        (checklistDeleted)="refreshChecklists()">
-      </app-checklist-list>
     </div>
   </div>
 </div>
