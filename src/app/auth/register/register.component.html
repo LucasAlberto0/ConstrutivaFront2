@@ -1,5 +1,5 @@
 <div class="register-container">
-  <div class="register-card">
+  <div class="card register-card">
     <img src="assets/logoMP.png" alt="MP Logo" class="logo">
     <h2>Cadastro</h2>
     <form (ngSubmit)="onRegister()">
@@ -19,7 +19,7 @@
         <label for="confirmPassword">Confirmar Senha</label>
         <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="registerData.confirmPassword" required>
       </div>
-      <button type="submit" class="btn-register">Cadastrar</button>
+      <button type="submit" class="btn-primary">Cadastrar</button>
       <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
       <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
       <a [routerLink]="['/login']" class="login-link">Já tem uma conta? Faça login</a>

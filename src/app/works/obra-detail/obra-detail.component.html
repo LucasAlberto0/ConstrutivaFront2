@@ -2,7 +2,7 @@
   <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
   <h2>Detalhes da Obra</h2>
 
-  <div class="tab-buttons">
+  <div class="custom-tab-menu">
     <button (click)="selectTab('Dados Básicos')" [class.active]="currentTab === 'Dados Básicos'">Dados Básicos</button>
     <button (click)="selectTab('Responsáveis')" [class.active]="currentTab === 'Responsáveis'">Responsáveis</button>
     <button (click)="selectTab('Status')" [class.active]="currentTab === 'Status'">Status</button>
@@ -14,7 +14,7 @@
   <div *ngIf="loading" class="loading-message">Carregando detalhes da obra...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div *ngIf="obra && !loading" class="obra-details-card">
+  <div *ngIf="obra && !loading" class="card obra-details-card">
     <div *ngIf="currentTab === 'Dados Básicos'" class="detail-section">
       <h3>Dados Básicos</h3>
       <p><strong>Nome:</strong> {{ obra.nome }}</p>

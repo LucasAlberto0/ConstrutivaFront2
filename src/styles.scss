@@ -3,7 +3,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 .container {
@@ -23,3 +23,174 @@ html, body {
     padding: 10px;
   }
 }
+
+/* Global Button Styles */
+button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px; /* Slightly more rounded */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent; /* Default transparent border */
+  font-family: inherit; /* Inherit font from body */
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Primary Button Style */
+.btn-primary {
+  background-color: #e53935; /* Red */
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  background-color: #c62828; /* Darker red */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Global Button Styles */
+button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px; /* Slightly more rounded */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent; /* Default transparent border */
+  font-family: inherit; /* Inherit font from body */
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Primary Button Style */
+.btn-primary {
+  background-color: #e53935; /* Red */
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+  background-color: #c62828; /* Darker red */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Danger Button Style */
+.btn-danger {
+  background-color: #dc3545; /* Red */
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Darker red */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Info Button Style */
+.btn-info {
+  background-color: #17a2b8; /* Teal */
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-info:hover {
+  background-color: #138496; /* Darker teal */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Small Button Style */
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+}
+
+/* Back Button Style */
+.btn-back {
+  background-color: transparent;
+  color: #555;
+  border: 1px solid #ccc;
+  box-shadow: none;
+}
+
+.btn-back:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+/* Logout Button Style */
+.btn-logout {
+  background-color: #e53935; /* Red */
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-logout:hover {
+  background-color: #c62828; /* Darker red */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Close Button Style */
+.btn-close {
+  background-color: transparent;
+  color: #6c757d;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 50%; /* Circular */
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close:hover {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+/* Global Card Style */
+.card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Stronger, softer shadow */
+}
+
+.custom-tab-menu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.custom-tab-menu button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-grow: 1;
+}
+
+.custom-tab-menu button:hover {
+  background-color: #e0e0e0;
+}
+
+.custom-tab-menu button.active {
+  background-color: #fff;
+  color: #e53935;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+

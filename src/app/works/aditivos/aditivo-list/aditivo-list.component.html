@@ -4,7 +4,7 @@
   <div *ngIf="loading" class="loading-message">Processando...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div class="aditivo-form">
+  <div class="card aditivo-form">
     <h4>Adicionar Novo Aditivo</h4>
     <form (ngSubmit)="addAditivo()">
       <div class="form-group">
@@ -15,16 +15,16 @@
         <label for="data">Data</label>
         <input type="date" id="data" name="data" [(ngModel)]="newAditivo.data" required>
       </div>
-      <button type="submit" class="btn-add">Adicionar Aditivo</button>
+      <button type="submit" class="btn-primary">Adicionar Aditivo</button>
     </form>
   </div>
 
-  <div *ngIf="aditivos && aditivos.length > 0" class="aditivos-display">
+  <div class="card aditivos-display">
     <h4>Aditivos Registrados</h4>
     <ul>
       <li *ngFor="let aditivo of aditivos">
         <span>{{ aditivo.data | date:'shortDate' }}: {{ aditivo.descricao }}</span>
-        <button (click)="deleteAditivo(aditivo.id)" class="btn-delete">Excluir</button>
+        <button (click)="deleteAditivo(aditivo.id)" class="btn-danger">Excluir</button>
       </li>
     </ul>
   </div>

@@ -4,7 +4,7 @@
   <div *ngIf="loading" class="loading-message">Processando...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div class="manutencao-form">
+  <div class="card manutencao-form">
     <h4>Adicionar Nova Manutenção</h4>
     <form (ngSubmit)="addManutencao()">
       <div class="form-group">
@@ -23,11 +23,11 @@
         <label for="datasManutencao">Datas das Manutenções (Ex: 01/01, 15/01)</label>
         <input type="text" id="datasManutencao" name="datasManutencao" [(ngModel)]="newManutencao.datasManutencao">
       </div>
-      <button type="submit" class="btn-add">Adicionar Manutenção</button>
+      <button type="submit" class="btn-primary">Adicionar Manutenção</button>
     </form>
   </div>
 
-  <div *ngIf="manutencoes && manutencoes.length > 0" class="manutencoes-display">
+  <div *ngIf="manutencoes && manutencoes.length > 0" class="card manutencoes-display">
     <h4>Manutenções Registradas</h4>
     <ul>
       <li *ngFor="let manutencao of manutencoes">
@@ -36,7 +36,7 @@
           <span *ngIf="manutencao.datasManutencao"> (Datas: {{ manutencao.datasManutencao }})</span>
           <span *ngIf="manutencao.imagemUrl"> | <a [href]="manutencao.imagemUrl" target="_blank">Ver Imagem</a></span>
         </span>
-        <button (click)="deleteManutencao(manutencao.id)" class="btn-delete">Excluir</button>
+        <button (click)="deleteManutencao(manutencao.id)" class="btn-danger">Excluir</button>
       </li>
     </ul>
   </div>

@@ -8,10 +8,6 @@
 }
 
 .register-card {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 100%;
   max-width: 320px; // Responsive up to 320px
@@ -49,23 +45,6 @@ input[type="text"] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 1rem;
-}
-
-.btn-register {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #e53935; // Red color
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 1rem;
-}
-
-.btn-register:hover {
-  background-color: #c62828; // Darker red on hover
 }
 
 .error-message {

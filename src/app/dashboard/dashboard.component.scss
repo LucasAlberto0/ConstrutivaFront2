@@ -41,19 +41,6 @@ h2 {
   margin-bottom: 2rem;
 }
 
-.card {
-  background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  transition: transform 0.2s ease-in-out;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
 .card h3 {
   margin-top: 0;
   color: #e53935; // Red
@@ -66,13 +53,6 @@ h2 {
   color: #333;
 }
 
-.recent-works {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .recent-works h3 {
   color: #e53935; // Red
   margin-top: 0;
@@ -83,18 +63,6 @@ h2 {
 .work-list {
   display: grid;
   gap: 1rem;
-}
-
-.work-item {
-  border: 1px solid #eee;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.work-item:hover {
-  background-color: #f0f0f0;
 }
 
 .work-item h4 {
