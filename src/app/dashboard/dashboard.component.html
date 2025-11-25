@@ -5,25 +5,55 @@
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <div *ngIf="dashboardSummary && !loading" class="summary-cards">
-    <div class="card">
-      <h3>Total de Obras</h3>
-      <p>{{ dashboardSummary.totalObras }}</p>
+    <div class="card-stats card-total">
+      <div class="descricao-card">
+      <h3>Total</h3>
+      <h1>{{ dashboardSummary.totalObras }}</h1>
+      <p>Total de Obras</p></div>
+      <article>
+        <img src="img/equalsIcon.svg" alt="">
+      </article>
     </div>
-    <div class="card">
+
+    <div class="card-stats card-em-andamento">
+      <div class="descricao-card">
       <h3>Em Andamento</h3>
-      <p>{{ dashboardSummary.obrasEmAndamento }}</p>
+      <h1>{{ dashboardSummary.obrasEmAndamento }}</h1>
+      <p>Obras em execução</p>
+  </div>
+      <article>
+        <img src="img/buildingIcon.svg" alt="">
+      </article>
     </div>
-    <div class="card">
+
+    <div class="card-stats card-em-manutencao">
+      <div class="descricao-card">
       <h3>Em Manutenção</h3>
-      <p>{{ dashboardSummary.obrasEmManutencao }}</p>
+      <h1>{{ dashboardSummary.obrasEmManutencao }}</h1>
+    <p>Requerendo manutenção</p></div>
+      <article>
+        <img src="img/maintenanceIcon.svg" alt="">
+      </article>
     </div>
-    <div class="card">
+
+    <div class="card-stats card-suspensas">
+      <div class="descricao-card">
       <h3>Suspensas</h3>
-      <p>{{ dashboardSummary.obrasSuspensas }}</p>
+      <h1>{{ dashboardSummary.obrasSuspensas }}</h1>
+    <p>Obras pausadas</p></div>
+    <article>
+      <img src="img/pauseIcon.svg" alt="">
+    </article>
     </div>
-    <div class="card">
+
+    <div class="card-stats card-finalizadas">
+      <div class="descricao-card">
       <h3>Finalizadas</h3>
-      <p>{{ dashboardSummary.obrasFinalizadas }}</p>
+      <h1>{{ dashboardSummary.obrasFinalizadas }}</h1>
+    <p>Concluídos com sucesso</p></div>
+    <article>
+      <img src="img/checkIcon.svg" alt="">
+    </article>
     </div>
   </div>
 
