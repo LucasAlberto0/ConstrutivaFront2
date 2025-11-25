@@ -6,9 +6,9 @@
   box-sizing: border-box;
 }
 
-h2 {
-  color: #1a0a0a; // Red
-  text-align: center;
+h1 {
+  color: #1a0a0a; 
+  text-align: left;
   margin-bottom: 1.5rem;
 }
 
@@ -44,7 +44,7 @@ h2 {
 }
 
 .card-stats {
-  min-width: 250px;
+  min-width: 270px;
   padding: 14px 18px;
   border: 0.5px solid #ddd;
   border-radius: 15px;
