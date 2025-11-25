@@ -63,8 +63,14 @@
 
   <ng-container *ngIf="dashboardSummary?.obrasRecentes as obrasRecentes">
     <div *ngIf="obrasRecentes.length > 0" class="card recent-works">
-      <h2>Obras Recentes</h2>
-      <p>Acompanhe o progresso das obras em andamento</p>
+      <div class="main-title">
+        <div>
+        <h2>Obras Recentes</h2>
+        <p>Acompanhe o progresso das obras em andamento</p>
+      </div>
+      <button><img src="img/plusIcon.svg" alt=""> Nova Obra</button>
+      </div>
+      
       <div class="work-list">
         <div *ngFor="let obra of obrasRecentes" class="card work-item" [routerLink]="['/obras', obra.id]">
           <div class="work-title">

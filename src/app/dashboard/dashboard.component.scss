@@ -151,6 +151,30 @@ h1 {
   gap: 1rem;
 }
 
+.main-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #e53935;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #9d1818;
+    }
+  }
+}
+
+
 .work-item {
   font-size: 1rem;
   display: flex;
@@ -163,7 +187,7 @@ h1 {
   &:hover {
     transform: translateY(-5px);
     border: 1.5px solid red;
-    box-shadow: 6px 6px #7e7e7f68;
+    box-shadow: 6px 6px #c9210eb3;
     cursor: pointer;
   }
 
