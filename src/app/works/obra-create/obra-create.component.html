@@ -1,6 +1,5 @@
 <div class="form-container">
   <div class="form-header">
-    <img src="img/buildingIcon.svg" alt="Building Icon">
     <h1>Criar Nova Obra</h1>
   </div>
   <form [formGroup]="obraForm" (ngSubmit)="onSubmit()">
@@ -65,6 +64,7 @@
       <button type="button" (click)="goBack()" class="btn btn-secondary">Voltar</button>
       <button type="submit" [disabled]="!obraForm.valid || loading" class="btn btn-primary">
         <span *ngIf="loading" class="spinner"></span>
+        <img *ngIf="!loading" src="img/saveIcon.svg" alt="Save Icon" class="button-icon">
         {{ loading ? 'Salvando...' : 'Salvar' }}
       </button>
     </div>

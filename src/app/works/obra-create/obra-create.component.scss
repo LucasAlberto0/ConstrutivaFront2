@@ -2,10 +2,11 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  border: 1px solid #ef4444;
+  border-top: 5px solid #ef4444;
+  border-bottom: 5px solid #ef4444;
 }
 
 .form-header {
@@ -120,4 +121,11 @@ textarea:focus {
   to {
     transform: rotate(360deg);
   }
+}
+
+.button-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
