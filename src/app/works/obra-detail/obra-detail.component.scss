@@ -6,9 +6,36 @@
   box-sizing: border-box;
 }
 
+h1{
+  margin: 5px 0px;
+}
+
+.btn-back {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 0.5rem 1rem; /* Smaller padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem; /* Smaller font size */
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #ef4444; /* Red border on hover */
+    color: #ef4444;
+  }
+}
+
 h2 {
   color: #e53935; // Red
-  text-align: center;
+  margin-bottom: 0.5rem; /* Adjusted margin */
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
@@ -29,6 +56,13 @@ h2 {
   color: #c62828;
 }
 
+.bg-progress-bar {
+  border: 0.5px solid #ddd;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
 .progress-bar-container {
   margin-bottom: 1.5rem;
   text-align: center;
@@ -38,6 +72,16 @@ h2 {
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h4{
+    margin: 5px;
+  }
+  h2{
+    color: red;
+    margin: 5px;
+  }
 }
 
 .progress-bar {
@@ -54,6 +98,8 @@ h2 {
   border-radius: 10px;
   transition: width 0.5s ease-in-out;
 }
+
+
 
 .detail-section {
   margin-bottom: 1.5rem;

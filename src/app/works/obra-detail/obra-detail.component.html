@@ -1,12 +1,14 @@
 <div class="obra-detail-container">
   <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
-  <h2>Detalhes da Obra</h2>
+  <h1 *ngIf="obra && !loading">{{ obra.nome }}</h1>
+  <p *ngIf="obra && !loading" class="subtitle">{{ obra.localizacao }}</p>
 
   <div *ngIf="obra && !loading" class="progress-bar-container">
-    <div class="progress-bar-label">Progresso Geral: {{ progress | number:'1.0-0' }}%</div>
+    <div class="bg-progress-bar">
+    <div class="progress-bar-label"><h4>Progresso Geral</h4> <h2>{{ progress | number:'1.0-0' }}%</h2></div>
     <div class="progress-bar">
       <div class="progress-bar-fill" [style.width.%]="progress"></div>
-    </div>
+    </div></div>
   </div>
 
   <div class="custom-tab-menu">
