@@ -6,9 +6,8 @@
   box-sizing: border-box;
 }
 
-h2 {
-  color: #e53935; // Red
-  text-align: center;
+h1 {
+  text-align: left;
   margin-bottom: 1.5rem;
 }
 
@@ -36,26 +35,90 @@ h2 {
 
 .obra-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Responsive grid
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.obra-card h3 {
-  margin-top: 0;
-  color: #e53935; // Red
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+.work-item {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: none;
+  border: 0.5px solid #ddd;
+  transition: all 0.3s ease;
+  padding: 14px 18px;
+  &:hover {
+    h4{
+      color: #ef4444;
+    }
+    transform: translateY(-5px);
+    border: 1.5px solid #ef4444;
+    box-shadow: 6px 6px #ef444473;
+    cursor: pointer;
+  }
+
+  .work-title {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .work-local {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+      height: 20px;
+      width: 20px;
+    }
+  }
+
+  h4 {
+    color: #333;
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+    color: #555;
+  }
 }
 
-.obra-card p {
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
-  color: #555;
+.pill {
+  font-size: 0.7rem;
+  padding: 5px;
+  border: 1px solid;
+  border-radius: 10px;
 }
 
-.obra-card p strong {
-  color: #333;
+.status-andamento {
+  color: #2463ea;
+  background-color: #e6f1f7;
+  border-color: #2463ea;
+}
+
+.status-manutencao {
+  color: #f59e0b;
+  background-color: #fef9e7;
+  border-color: #f59e0b;
+}
+
+.status-suspensa {
+  color: #ef4444;
+  background-color: #feeded;
+  border-color: #ef4444;
+}
+
+.status-finalizada {
+  color: #10b981;
+  background-color: #e7f8f3;
+  border-color: #10b981;
 }
 
 /* Responsive adjustments for smaller screens */
@@ -72,20 +135,15 @@ h2 {
     grid-template-columns: 1fr; // Stack cards on very small screens
   }
 
-  .obra-card {
+  .work-item {
     padding: 1rem;
   }
 
-  .obra-card h3 {
+  .work-item h4 {
     font-size: 1rem;
   }
 
-  .obra-card p {
+  .work-item p {
     font-size: 0.85rem;
-  }
-
-  .btn-details {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.8rem;
   }
 }

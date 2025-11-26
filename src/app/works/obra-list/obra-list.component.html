@@ -1,5 +1,5 @@
 <div class="obra-list-container">
-  <h2>Lista de Obras</h2>
+  <h1>Lista de Obras</h1>
 
   <div class="custom-tab-menu">
     <button (click)="filterObras('Todas')" [class.active]="currentFilter === 'Todas'">Todas</button>
@@ -13,13 +13,17 @@
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
   <div *ngIf="filteredObras.length > 0 && !loading" class="obra-cards">
-    <div *ngFor="let obra of filteredObras" class="card obra-card">
-      <h3>{{ obra.nome }}</h3>
-      <p><strong>Localização:</strong> {{ obra.localizacao }}</p>
-      <p><strong>Status:</strong> {{ getStatusName(obra.status) }}</p>
-      <p><strong>Início:</strong> {{ obra.dataInicio | date:'shortDate' }}</p>
-      <p><strong>Término:</strong> {{ obra.dataTermino | date:'shortDate' }}</p>
-      <a [routerLink]="['/obras', obra.id]" class="btn-info">Ver Detalhes</a>
+    <div *ngFor="let obra of filteredObras" class="card work-item" [routerLink]="['/obras', obra.id]">
+      <div class="work-title">
+        <h4>{{ obra.nome }}</h4>
+        <div class="pill" [ngClass]="getStatusClass(obra.status)">{{ getStatusName(obra.status) }}</div>
+      </div>
+      <div class="work-local">
+        <img src="img/localIcon.svg" alt="">
+        <p>{{ obra.localizacao }}</p>
+      </div>
+      <p>Início: {{ obra.dataInicio | date:'shortDate' }}</p>
+      <p>Término: {{ obra.dataTermino | date:'shortDate' }}</p>
     </div>
   </div>
 

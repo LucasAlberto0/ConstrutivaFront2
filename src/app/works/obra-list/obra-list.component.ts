@@ -66,4 +66,14 @@ export class ObraListComponent implements OnInit {
       default: return 'Desconhecido';
     }
   }
+
+  getStatusClass(status: ObraStatus | undefined): string {
+    switch (status) {
+      case ObraStatus.EmAndamento: return 'status-andamento';
+      case ObraStatus.EmManutencao: return 'status-manutencao';
+      case ObraStatus.Suspensa: return 'status-suspensa';
+      case ObraStatus.Finalizada: return 'status-finalizada';
+      default: return '';
+    }
+  }
 }
