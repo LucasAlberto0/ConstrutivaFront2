@@ -22,6 +22,7 @@ export class ObraDetailComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   currentTab: string = 'Dados Básicos'; // Initialize currentTab
+  progress: number = 0; // New property for progress
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +54,7 @@ export class ObraDetailComponent implements OnInit {
           // This handles both cases, making it more robust.
           this.obra = response;
         }
+        this.progress = this.calculateProgress(); // Calculate progress after obra is assigned
         this.loading = false;
       },
       error: (err) => {
@@ -109,5 +111,35 @@ export class ObraDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/obras']);
+  }
+
+  calculateProgress(): number {
+    if (!this.obra || !this.obra.dataInicio || !this.obra.dataTermino) {
+      return 0;
+    }
+
+    const startDate = new Date(this.obra.dataInicio);
+    const endDate = new Date(this.obra.dataTermino);
+    const currentDate = new Date();
+
+    // If start date is in the future, 0% progress
+    if (currentDate < startDate) {
+      return 0;
+    }
+
+    // If end date is in the past, 100% progress
+    if (currentDate > endDate) {
+      return 100;
+    }
+
+    const totalDuration = endDate.getTime() - startDate.getTime();
+    const elapsedDuration = currentDate.getTime() - startDate.getTime();
+
+    if (totalDuration === 0) {
+      return 0; // Avoid division by zero if start and end dates are the same
+    }
+
+    const progress = (elapsedDuration / totalDuration) * 100;
+    return Math.min(100, Math.max(0, progress)); // Ensure progress is between 0 and 100
   }
 }

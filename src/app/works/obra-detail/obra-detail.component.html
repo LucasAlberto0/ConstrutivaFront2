@@ -2,6 +2,13 @@
   <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
   <h2>Detalhes da Obra</h2>
 
+  <div *ngIf="obra && !loading" class="progress-bar-container">
+    <div class="progress-bar-label">Progresso Geral: {{ progress | number:'1.0-0' }}%</div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" [style.width.%]="progress"></div>
+    </div>
+  </div>
+
   <div class="custom-tab-menu">
     <button (click)="selectTab('Dados Básicos')" [class.active]="currentTab === 'Dados Básicos'">Dados Básicos</button>
     <button (click)="selectTab('Responsáveis')" [class.active]="currentTab === 'Responsáveis'">Responsáveis</button>
