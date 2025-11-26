@@ -47,7 +47,7 @@
 .login-card {
   width: 100%;
   max-width: 400px; // Max width for the form itself
-  padding: 2rem;
+  padding: 0rem 2rem 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -55,7 +55,6 @@
 
 .logo {
   width: 100px;
-  margin-bottom: 1.5rem;
 }
 
 h2 {
