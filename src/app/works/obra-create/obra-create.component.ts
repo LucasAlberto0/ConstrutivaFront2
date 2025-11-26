@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ObraService } from '../../shared/obra.service';
+import { AuthService } from '../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-obra-create',
@@ -21,11 +22,13 @@ export class ObraCreateComponent {
     { value: 2, name: 'Suspensa' },
     { value: 3, name: 'Finalizada' }
   ];
+  canCreateObra: boolean = false; // Added property
 
   constructor(
     private fb: FormBuilder,
     private obraService: ObraService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService // Injected AuthService
   ) {
     this.obraForm = this.fb.group({
       nome: ['', Validators.required],
@@ -42,6 +45,8 @@ export class ObraCreateComponent {
       observacoes: [''],
       status: [0, Validators.required] // Default status to 0 'Em Andamento'
     });
+    this.canCreateObra = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canCreateObra
+    console.log('ObraCreateComponent: canCreateObra =', this.canCreateObra); // Added console.log
   }
 
   goBack(): void {

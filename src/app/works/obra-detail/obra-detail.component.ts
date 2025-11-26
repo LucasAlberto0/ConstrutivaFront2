@@ -8,6 +8,7 @@ import { ManutencaoListComponent } from '../manutencoes/manutencao-list/manutenc
 import { DiarioListComponent } from '../diarios/diario-list/diario-list.component';
 import { DocumentoListComponent } from '../documentos/documento-list/documento-list.component';
 import { ChecklistListComponent } from '../checklists/checklist-list/checklist-list.component'; // Import ChecklistListComponent
+import { AuthService } from '../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-obra-detail',
@@ -23,11 +24,13 @@ export class ObraDetailComponent implements OnInit {
   error: string | null = null;
   currentTab: string = 'Dados Básicos'; // Initialize currentTab
   progress: number = 0; // New property for progress
+  canEditObra: boolean = false; // Added property
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private obraService: ObraService
+    private obraService: ObraService,
+    private authService: AuthService // Injected AuthService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class ObraDetailComponent implements OnInit {
         this.loading = false;
       }
     });
+    this.canEditObra = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canEditObra
   }
 
   loadObraDetails(id: number): void {
@@ -111,6 +115,26 @@ export class ObraDetailComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/obras']);
+  }
+
+  editObra(): void {
+    if (this.obraId) {
+      this.router.navigate(['/obras/edit', this.obraId]); // Assuming an edit route
+    }
+  }
+
+  deleteObra(): void {
+    if (this.obraId && confirm('Are you sure you want to delete this obra?')) {
+      this.obraService.deleteObra(this.obraId).subscribe({
+        next: () => {
+          this.router.navigate(['/obras']); // Navigate back to obras list after deletion
+        },
+        error: (err) => {
+          console.error('Failed to delete obra:', err);
+          // Optionally show a snackbar message
+        }
+      });
+    }
   }
 
   calculateProgress(): number {

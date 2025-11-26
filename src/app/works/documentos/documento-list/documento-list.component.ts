@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../../shared/documento.service';
 import { DocumentoListagemDto, DocumentoCriacaoDto } from '../../../shared/models/documento.model';
 import { TipoPasta } from '../../../shared/models/obra.model';
+import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-documento-list',
@@ -27,11 +28,13 @@ export class DocumentoListComponent implements OnInit {
   loading: boolean = false;
   error: string | null = null;
   tipoPastaOptions = Object.values(TipoPasta).filter(value => typeof value === 'number');
+  canManageDocumentos: boolean = false; // Added property
 
-  constructor(private documentoService: DocumentoService) { }
+  constructor(private documentoService: DocumentoService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
     this.newDocumento.obraId = this.obraId;
+    this.canManageDocumentos = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageDocumentos
   }
 
   addDocumento(): void {

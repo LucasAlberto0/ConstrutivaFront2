@@ -8,4 +8,5 @@ export interface RegisterDto {
   password: string;
   confirmPassword?: string;
   nomeCompleto?: string;
+  role: 'Admin' | 'Coordenador' | 'Fiscal'; // Added role property
 }

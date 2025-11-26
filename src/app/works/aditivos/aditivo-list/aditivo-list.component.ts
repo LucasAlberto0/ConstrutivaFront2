@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AditivoService } from '../../../shared/aditivo.service';
 import { AditivoListagemDto, AditivoCriacaoDto } from '../../../shared/models/aditivo.model';
+import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-aditivo-list',
@@ -24,11 +25,13 @@ export class AditivoListComponent implements OnInit {
   };
   loading: boolean = false;
   error: string | null = null;
+  canManageAditivos: boolean = false; // Added property
 
-  constructor(private aditivoService: AditivoService) { }
+  constructor(private aditivoService: AditivoService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
     this.newAditivo.obraId = this.obraId;
+    this.canManageAditivos = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageAditivos
   }
 
   addAditivo(): void {

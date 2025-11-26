@@ -13,7 +13,8 @@ import { RegisterDto } from '../../shared/models/auth.model';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  registerData: RegisterDto = { email: '', password: '', confirmPassword: '', nomeCompleto: '' };
+  registerData: RegisterDto = { email: '', password: '', confirmPassword: '', nomeCompleto: '', role: 'Fiscal' }; // Default role
+  roles: ('Admin' | 'Coordenador' | 'Fiscal')[] = ['Admin', 'Coordenador', 'Fiscal'];
   errorMessage: string = '';
   successMessage: string = '';
 

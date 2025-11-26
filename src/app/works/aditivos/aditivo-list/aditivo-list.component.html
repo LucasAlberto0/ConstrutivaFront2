@@ -4,7 +4,7 @@
   <div *ngIf="loading" class="loading-message">Processando...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div class="card aditivo-form">
+  <div *ngIf="canManageAditivos" class="card aditivo-form">
     <h4>Adicionar Novo Aditivo</h4>
     <form (ngSubmit)="addAditivo()">
       <div class="form-group">
@@ -24,7 +24,7 @@
     <ul>
       <li *ngFor="let aditivo of aditivos">
         <span>{{ aditivo.data | date:'shortDate' }}: {{ aditivo.descricao }}</span>
-        <button (click)="deleteAditivo(aditivo.id)" class="btn-danger">Excluir</button>
+        <button *ngIf="canManageAditivos" (click)="deleteAditivo(aditivo.id)" class="btn-danger">Excluir</button>
       </li>
     </ul>
   </div>

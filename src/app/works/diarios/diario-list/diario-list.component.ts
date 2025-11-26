@@ -5,6 +5,7 @@ import { DiarioService } from '../../../shared/diario.service';
 import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto } from '../../../shared/models/diario.model';
 import { FotoDiarioDto } from '../../../shared/models/foto-diario.model';
 import { ComentarioDto } from '../../../shared/models/comentario.model';
+import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-diario-list',
@@ -33,11 +34,13 @@ export class DiarioListComponent implements OnInit {
   currentDiarioDetalhes: any = null; // To store details of a selected diario
   loading: boolean = false;
   error: string | null = null;
+  canManageDiarios: boolean = false; // Added property
 
-  constructor(private diarioService: DiarioService) { }
+  constructor(private diarioService: DiarioService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
     this.newDiario.obraId = this.obraId;
+    this.canManageDiarios = this.authService.hasRole(['Admin', 'Fiscal']); // Initialize canManageDiarios
   }
 
   addDiario(): void {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ManutencaoService } from '../../../shared/manutencao.service';
 import { ManutencaoListagemDto, ManutencaoCriacaoDto } from '../../../shared/models/manutencao.model';
+import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-manutencao-list',
@@ -26,11 +27,13 @@ export class ManutencaoListComponent implements OnInit {
   };
   loading: boolean = false;
   error: string | null = null;
+  canManageManutencoes: boolean = false; // Added property
 
-  constructor(private manutencaoService: ManutencaoService) { }
+  constructor(private manutencaoService: ManutencaoService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
     this.newManutencao.obraId = this.obraId;
+    this.canManageManutencoes = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageManutencoes
   }
 
   addManutencao(): void {

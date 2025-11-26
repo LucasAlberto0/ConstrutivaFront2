@@ -1,72 +1,82 @@
-<div class="form-container">
-  <div class="form-header">
-    <h1>Criar Nova Obra</h1>
+<div *ngIf="canCreateObra; else noPermission">
+  <div class="form-container">
+    <div class="form-header">
+      <h1>Criar Nova Obra</h1>
+    </div>
+    <form [formGroup]="obraForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+      <div class="form-group">
+        <label for="nome">Nome da Obra</label>
+        <input id="nome" formControlName="nome" placeholder="Nome da Obra">
+      </div>
+      <div class="form-group">
+        <label for="localizacao">Localização</label>
+        <input id="localizacao" formControlName="localizacao" placeholder="Localização">
+      </div>
+      <div class="form-group">
+        <label for="contratante">Contratante</label>
+        <input id="contratante" formControlName="contratante" placeholder="Contratante">
+      </div>
+      <div class="form-group">
+        <label for="contrato">Contrato</label>
+        <input id="contrato" formControlName="contrato" placeholder="Contrato">
+      </div>
+      <div class="form-group">
+        <label for="ordemInicioServico">Ordem de Início de Serviço</label>
+        <input id="ordemInicioServico" formControlName="ordemInicioServico" placeholder="Ordem de Início de Serviço">
+      </div>
+      <div class="form-group">
+        <label for="coordenadorNome">Nome do Coordenador</label>
+        <input id="coordenadorNome" formControlName="coordenadorNome" placeholder="Nome do Coordenador">
+      </div>
+      <div class="form-group">
+        <label for="administradorNome">Nome do Administrador</label>
+        <input id="administradorNome" formControlName="administradorNome" placeholder="Nome do Administrador">
+      </div>
+      <div class="form-group">
+        <label for="responsavelTecnicoNome">Nome do Responsável Técnico</label>
+        <input id="responsavelTecnicoNome" formControlName="responsavelTecnicoNome" placeholder="Nome do Responsável Técnico">
+      </div>
+      <div class="form-group">
+        <label for="equipe">Equipe</label>
+        <input id="equipe" formControlName="equipe" placeholder="Equipe">
+      </div>
+      <div class="form-group">
+        <label for="dataInicio">Data de Início</label>
+        <input id="dataInicio" type="date" formControlName="dataInicio">
+      </div>
+      <div class="form-group">
+        <label for="dataTermino">Data de Término</label>
+        <input id="dataTermino" type="date" formControlName="dataTermino">
+      </div>
+      <div class="form-group">
+        <label for="observacoes">Observações</label>
+        <textarea id="observacoes" formControlName="observacoes" placeholder="Observações"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option *ngFor="let status of statuses" [value]="status.value">
+            {{ status.name }}
+          </option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="button" (click)="goBack()" class="btn btn-secondary">Voltar</button>
+        <button type="submit" [disabled]="!obraForm.valid || loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner"></span>
+          <img *ngIf="!loading" src="img/saveIcon.svg" alt="Save Icon" class="button-icon">
+          {{ loading ? 'Salvando...' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
   </div>
-  <form [formGroup]="obraForm" (ngSubmit)="onSubmit()">
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-    <div class="form-group">
-      <label for="nome">Nome da Obra</label>
-      <input id="nome" formControlName="nome" placeholder="Nome da Obra">
-    </div>
-    <div class="form-group">
-      <label for="localizacao">Localização</label>
-      <input id="localizacao" formControlName="localizacao" placeholder="Localização">
-    </div>
-    <div class="form-group">
-      <label for="contratante">Contratante</label>
-      <input id="contratante" formControlName="contratante" placeholder="Contratante">
-    </div>
-    <div class="form-group">
-      <label for="contrato">Contrato</label>
-      <input id="contrato" formControlName="contrato" placeholder="Contrato">
-    </div>
-    <div class="form-group">
-      <label for="ordemInicioServico">Ordem de Início de Serviço</label>
-      <input id="ordemInicioServico" formControlName="ordemInicioServico" placeholder="Ordem de Início de Serviço">
-    </div>
-    <div class="form-group">
-      <label for="coordenadorNome">Nome do Coordenador</label>
-      <input id="coordenadorNome" formControlName="coordenadorNome" placeholder="Nome do Coordenador">
-    </div>
-    <div class="form-group">
-      <label for="administradorNome">Nome do Administrador</label>
-      <input id="administradorNome" formControlName="administradorNome" placeholder="Nome do Administrador">
-    </div>
-    <div class="form-group">
-      <label for="responsavelTecnicoNome">Nome do Responsável Técnico</label>
-      <input id="responsavelTecnicoNome" formControlName="responsavelTecnicoNome" placeholder="Nome do Responsável Técnico">
-    </div>
-    <div class="form-group">
-      <label for="equipe">Equipe</label>
-      <input id="equipe" formControlName="equipe" placeholder="Equipe">
-    </div>
-    <div class="form-group">
-      <label for="dataInicio">Data de Início</label>
-      <input id="dataInicio" type="date" formControlName="dataInicio">
-    </div>
-    <div class="form-group">
-      <label for="dataTermino">Data de Término</label>
-      <input id="dataTermino" type="date" formControlName="dataTermino">
-    </div>
-    <div class="form-group">
-      <label for="observacoes">Observações</label>
-      <textarea id="observacoes" formControlName="observacoes" placeholder="Observações"></textarea>
-    </div>
-    <div class="form-group">
-      <label for="status">Status</label>
-      <select id="status" formControlName="status">
-        <option *ngFor="let status of statuses" [value]="status.value">
-          {{ status.name }}
-        </option>
-      </select>
-    </div>
-    <div class="form-actions">
-      <button type="button" (click)="goBack()" class="btn btn-secondary">Voltar</button>
-      <button type="submit" [disabled]="!obraForm.valid || loading" class="btn btn-primary">
-        <span *ngIf="loading" class="spinner"></span>
-        <img *ngIf="!loading" src="img/saveIcon.svg" alt="Save Icon" class="button-icon">
-        {{ loading ? 'Salvando...' : 'Salvar' }}
-      </button>
-    </div>
-  </form>
 </div>
+
+<ng-template #noPermission>
+  <div class="permission-denied">
+    <h2>Acesso Negado</h2>
+    <p>Você não tem permissão para criar novas obras.</p>
+    <button type="button" (click)="goBack()" class="btn btn-secondary">Voltar</button>
+  </div>
+</ng-template>

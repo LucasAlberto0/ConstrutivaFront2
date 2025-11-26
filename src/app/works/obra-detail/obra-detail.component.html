@@ -1,7 +1,12 @@
 <div class="obra-detail-container">
-  <button (click)="goBack()" class="btn-back">← Voltar para Obras</button>
-  <h1 *ngIf="obra && !loading">{{ obra.nome }}</h1>
-  <p *ngIf="obra && !loading" class="subtitle">{{ obra.localizacao }}</p>
+  <div class="obra-header">
+    <h1>{{ obra?.nome }}</h1>
+    <div class="obra-actions">
+      <button *ngIf="canEditObra" class="btn btn-primary" (click)="editObra()">Editar Obra</button>
+      <button *ngIf="canEditObra" class="btn btn-danger" (click)="deleteObra()">Excluir Obra</button>
+      <button class="btn btn-secondary" (click)="goBack()">Voltar</button>
+    </div>
+  </div>
 
   <div *ngIf="obra && !loading" class="progress-bar-container">
     <div class="bg-progress-bar">

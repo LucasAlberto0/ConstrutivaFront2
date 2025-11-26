@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChecklistService } from '../../../shared/checklist.service';
 import { ChecklistListagemDto, ChecklistCriacaoDto, ChecklistItemCriacaoDto, ChecklistItemAtualizacaoDto } from '../../../shared/models/checklist.model';
 import { TipoChecklist } from '../../../shared/models/obra.model';
+import { AuthService } from '../../../shared/auth.service'; // Added import
 
 @Component({
   selector: 'app-checklist-list',
@@ -28,11 +29,13 @@ export class ChecklistListComponent implements OnInit {
   error: string | null = null;
   tipoChecklistOptions = Object.values(TipoChecklist).filter(value => typeof value === 'number');
   currentChecklistDetalhes: any = null; // To store details of a selected checklist
+  canManageChecklists: boolean = false; // Added property
 
-  constructor(private checklistService: ChecklistService) { }
+  constructor(private checklistService: ChecklistService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
     this.newChecklist.obraId = this.obraId;
+    this.canManageChecklists = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageChecklists
   }
 
   addChecklist(): void {

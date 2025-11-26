@@ -4,7 +4,7 @@
   <div *ngIf="loading" class="loading-message">Processando...</div>
   <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div class="card checklist-form">
+  <div *ngIf="canManageChecklists" class="card checklist-form">
     <h4>Adicionar Novo Checklist</h4>
     <form (ngSubmit)="addChecklist()">
       <div class="form-group">
@@ -26,7 +26,7 @@
         <span>Checklist de {{ getChecklistTypeName(checklist.tipo) }}</span>
         <div>
           <button (click)="viewChecklistDetails(checklist.id)" class="btn-info">Ver Detalhes</button>
-          <button (click)="deleteChecklist(checklist.id)" class="btn-danger">Excluir</button>
+          <button *ngIf="canManageChecklists" (click)="deleteChecklist(checklist.id)" class="btn-danger">Excluir</button>
         </div>
       </li>
     </ul>
@@ -43,15 +43,15 @@
       <h4>Detalhes do Checklist de {{ getChecklistTypeName(currentChecklistDetalhes.tipo) }}</h4>
 
       <h5>Itens do Checklist</h5>
-      <div class="form-group">
+      <div *ngIf="canManageChecklists" class="form-group">
         <input type="text" [(ngModel)]="newChecklistItemName" placeholder="Nome do novo item">
         <button (click)="addItem(currentChecklistDetalhes.id)" class="btn-primary btn-small">Adicionar Item</button>
       </div>
       <ul>
         <li *ngFor="let item of currentChecklistDetalhes.itens">
-          <input type="checkbox" [(ngModel)]="item.concluido" (change)="updateItemStatus(currentChecklistDetalhes.id, item)">
+          <input type="checkbox" [(ngModel)]="item.concluido" (change)="updateItemStatus(currentChecklistDetalhes.id, item)" [disabled]="!canManageChecklists">
           <span>{{ item.nome }}</span>
-          <button (click)="deleteItem(currentChecklistDetalhes.id, item.id)" class="btn-danger btn-small">X</button>
+          <button *ngIf="canManageChecklists" (click)="deleteItem(currentChecklistDetalhes.id, item.id)" class="btn-danger btn-small">X</button>
         </li>
       </ul>
       <p *ngIf="!currentChecklistDetalhes.itens || currentChecklistDetalhes.itens.length === 0">Nenhum item no checklist.</p>
