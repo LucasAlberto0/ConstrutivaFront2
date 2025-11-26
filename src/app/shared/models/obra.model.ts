@@ -21,11 +21,13 @@ export interface ObraCriacaoDto {
   contrato?: string;
   ordemInicioServico?: string;
   coordenadorNome?: string;
+  administradorNome?: string;
   responsavelTecnicoNome?: string;
   equipe?: string;
   dataInicio?: string;
   dataTermino?: string;
   status?: ObraStatus;
+  observacoes?: string;
 }
 
 export interface ObraAtualizacaoDto {

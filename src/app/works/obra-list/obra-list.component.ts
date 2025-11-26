@@ -27,11 +27,18 @@ export class ObraListComponent implements OnInit {
   loadObras(): void {
     this.loading = true;
     this.obraService.getObras().subscribe({
-      next: (data) => {
-        this.obras = data;
-        this.filteredObras = [...this.obras]; // Initialize filteredObras with all obras
+      next: (response: any) => {
+        if (response && Array.isArray(response.data)) {
+          this.obras = response.data;
+          this.filteredObras = [...this.obras];
+          this.filterObras('Todas');
+        } else {
+          console.error('Error: getObras() did not return an array in the data property.', response);
+          this.obras = [];
+          this.filteredObras = [];
+          this.error = 'Failed to load works: Invalid data format.';
+        }
         this.loading = false;
-        this.filterObras('Todas'); // Apply initial filter
       },
       error: (err) => {
         this.error = 'Failed to load works.';

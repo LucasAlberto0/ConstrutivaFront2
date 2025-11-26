@@ -34,10 +34,12 @@ export class ObraCreateComponent {
       contrato: ['', Validators.required],
       ordemInicioServico: ['', Validators.required],
       coordenadorNome: ['', Validators.required],
+      administradorNome: [''],
       responsavelTecnicoNome: ['', Validators.required],
       equipe: ['', Validators.required],
       dataInicio: ['', Validators.required],
       dataTermino: ['', Validators.required],
+      observacoes: [''],
       status: [0, Validators.required] // Default status to 0 'Em Andamento'
     });
   }
