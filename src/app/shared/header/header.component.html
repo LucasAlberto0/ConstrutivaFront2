@@ -1,20 +1,44 @@
 <header class="header">
+
   <div class="header__container">
-    <div class="header__left">
-      <div class="header__logo">
-        <a routerLink="/dashboard">
-          <img src="img/logoMP.png" alt="Logo">
-        </a>
-      </div>
-      <nav class="header__nav">
-        <ul>
-          <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-          <li><a routerLink="/obras" routerLinkActive="active">Obras</a></li>
-        </ul>
-      </nav>
+
+    <div class="header__logo">
+      <a routerLink="/dashboard">
+        <img src="img/logoMP.png" alt="Logo">
+      </a>
+      <nav class="header__nav desktop">
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li><a routerLink="/obras" routerLinkActive="active">Obras</a></li>
+      </ul>
+    </nav>
     </div>
-    <div class="header__logout">
-      <button (click)="logout()" class="btn-logout"><img src="img/logoutIcon.svg" alt=""></button>
+
+    <div class="header__logout desktop">
+      <button (click)="logout()" class="btn-logout">
+        <img src="img/logoutIcon.svg" alt="">
+      </button>
     </div>
+
+    <div class="menu-btn" [class.open]="menuOpen" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
   </div>
+
+  <nav class="header__nav mobile-menu" [class.show]="menuOpen">
+    <ul>
+      <li><a routerLink="/dashboard" routerLinkActive="active" (click)="closeMenu()">Dashboard</a></li>
+      <li><a routerLink="/obras" routerLinkActive="active" (click)="closeMenu()">Obras</a></li>
+
+      <li>
+        <button class="mobile-logout" (click)="logout()">
+          <img src="img/logoutIcon.svg" alt=""> Logout
+        </button>
+      </li>
+    </ul>
+  </nav>
+
 </header>
