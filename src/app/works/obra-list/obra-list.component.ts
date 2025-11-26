@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { ObraService } from '../../shared/obra.service';
 import { ObraListagemDto, ObraStatus } from '../../shared/models/obra.model';
 import { RouterLink } from '@angular/router';
@@ -7,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-obra-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule], // Add FormsModule to imports
   templateUrl: './obra-list.component.html',
   styleUrls: ['./obra-list.component.scss']
 })
@@ -17,6 +18,7 @@ export class ObraListComponent implements OnInit {
   loading: boolean = true;
   error: string | null = null;
   currentFilter: string = 'Todas';
+  searchTerm: string = ''; // New property for search term
 
   constructor(private obraService: ObraService) { }
 
@@ -31,7 +33,7 @@ export class ObraListComponent implements OnInit {
         if (response && Array.isArray(response.data)) {
           this.obras = response.data;
           this.filteredObras = [...this.obras];
-          this.filterObras('Todas');
+          this.applySearchFilter(); // Apply search filter after loading obras
         } else {
           console.error('Error: getObras() did not return an array in the data property.', response);
           this.obras = [];
@@ -50,11 +52,26 @@ export class ObraListComponent implements OnInit {
 
   filterObras(filter: string): void {
     this.currentFilter = filter;
-    if (filter === 'Todas') {
-      this.filteredObras = [...this.obras];
-    } else {
-      this.filteredObras = this.obras.filter(obra => this.getStatusName(obra.status) === filter);
+    this.applySearchFilter(); // Apply search filter after changing tab filter
+  }
+
+  applySearchFilter(): void {
+    let tempObras = [...this.obras];
+
+    // Apply tab filter first
+    if (this.currentFilter !== 'Todas') {
+      tempObras = tempObras.filter(obra => this.getStatusName(obra.status) === this.currentFilter);
     }
+
+    // Apply search term filter
+    if (this.searchTerm) {
+      const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
+      tempObras = tempObras.filter(obra =>
+        obra.nome?.toLowerCase().includes(lowerCaseSearchTerm)
+      );
+    }
+
+    this.filteredObras = tempObras;
   }
 
   getStatusName(status: ObraStatus | undefined): string {
