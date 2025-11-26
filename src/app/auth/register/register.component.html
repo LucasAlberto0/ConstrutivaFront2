@@ -27,8 +27,6 @@
           </select>
         </div>
         <button type="submit" class="btn-primary">Cadastrar</button>
-        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
-        <p *ngIf="successMessage" class="success-message">{{ successMessage }}</p>
         <a [routerLink]="['/login']" class="login-link">Já tem uma conta? Faça login</a>
       </form>
     </div>

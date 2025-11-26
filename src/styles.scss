@@ -195,3 +195,14 @@ button:hover {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Snackbar Styles */
+.error-snackbar {
+  background-color: #d32f2f !important; /* Red */
+  color: #fff !important;
+}
+
+.warn-snackbar {
+  background-color: #ffc107 !important; /* Amber */
+  color: #333 !important;
+}
+
