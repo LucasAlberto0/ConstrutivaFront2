@@ -2,7 +2,7 @@
   <h1>Dashboard</h1>
 
   <div *ngIf="loading" class="loading-message">Loading dashboard data...</div>
-  <div *ngIf="error" class="error-message">{{ error }}</div>
+  <div *ngIf="error" class="error-message">{{ error }} </div>
 
   <div *ngIf="dashboardSummary && !loading" class="summary-cards">
     <div class="card-stats card-total">
@@ -86,11 +86,11 @@
       </div>
     </div>
     <div *ngIf="obrasRecentes.length === 0 && !loading" class="no-data-message">
-      Nenhuma obra recente para exibir.
+      Nenhuma obra recente para exibir. 
     </div>
   </ng-container>
 
   <div *ngIf="!dashboardSummary?.obrasRecentes && !loading" class="no-data-message">
-    Nenhuma obra recente para exibir.
+    Nenhuma obra recente para exibir. <button [routerLink]="['/obras/criar']"><img src="img/plusIcon.svg" alt=""> Nova Obra</button>
   </div>
 </div>
