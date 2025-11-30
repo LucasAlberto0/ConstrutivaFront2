@@ -32,27 +32,66 @@
   <div *ngIf="obra && !loading" class="card obra-details-card">
     <div *ngIf="currentTab === 'Dados Básicos'" class="detail-section">
       <h3>Dados Básicos</h3>
-      <p><strong>Nome:</strong> {{ obra.nome }}</p>
-      <p><strong>Localização:</strong> {{ obra.localizacao }}</p>
-      <p><strong>Contratante:</strong> {{ obra.contratante }}</p>
-      <p><strong>Contrato:</strong> {{ obra.contrato }}</p>
-      <p><strong>Ordem de Início de Serviço:</strong> {{ obra.ordemInicioServico }}</p>
-      <p><strong>Coordenador:</strong> {{ obra.coordenadorNome }}</p>
-      <p><strong>Administrador:</strong> {{ obra.administradorNome }}</p>
-      <p><strong>Observações:</strong> {{ obra.observacoes }}</p>
+      <div class="info-box">
+        <p><img src="img/redIcons/nameIconRed.svg" alt="Nome"> <strong>Nome:</strong></p>
+        <p>{{ obra.nome }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/localIcon.svg" alt="Localização"> <strong>Localização:</strong></p>
+        <p>{{ obra.localizacao }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/contractIconRed.svg" alt="Contratante"> <strong>Contratante:</strong></p>
+        <p>{{ obra.contratante }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/contractIconRed.svg" alt="Contrato"> <strong>Contrato:</strong></p>
+        <p>{{ obra.contrato }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/contractIconRed.svg" alt="Ordem de Início de Serviço"> <strong>Ordem de Início de Serviço:</strong></p>
+        <p>{{ obra.ordemInicioServico }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/coordinatorIconRed.svg" alt="Coordenador"> <strong>Coordenador:</strong></p>
+        <p>{{ obra.coordenadorNome }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/admIconRed.svg" alt="Administrador"> <strong>Administrador:</strong></p>
+        <p>{{ obra.administradorNome }}</p>
+      </div>
+      <div class="info-box full-width">
+        <p><img src="img/redIcons/clipboardIconRed.svg" alt="Observações"> <strong>Observações:</strong></p>
+        <p>{{ obra.observacoes }}</p>
+      </div>
     </div>
 
     <div *ngIf="currentTab === 'Responsáveis'" class="detail-section">
       <h3>Responsáveis</h3>
-      <p><strong>Responsável Técnico:</strong> {{ obra.responsavelTecnicoNome }}</p>
-      <p><strong>Equipe:</strong> {{ obra.equipe }}</p>
+      <div class="info-box">
+        <p><img src="img/redIcons/engineerIconRed.svg" alt="Responsável Técnico"> <strong>Responsável Técnico:</strong></p>
+        <p>{{ obra.responsavelTecnicoNome }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/teamIconRed.svg" alt="Equipe"> <strong>Equipe:</strong></p>
+        <p>{{ obra.equipe }}</p>
+      </div>
     </div>
 
     <div *ngIf="currentTab === 'Status'" class="detail-section">
       <h3>Status dos Serviços</h3>
-      <p><strong>Data de Início:</strong> {{ obra.dataInicio | date:'shortDate' }}</p>
-      <p><strong>Data de Término:</strong> {{ obra.dataTermino | date:'shortDate' }}</p>
-      <p><strong>Status:</strong> {{ getStatusName(obra.status) }}</p>
+      <div class="info-box">
+        <p><img src="img/redIcons/calendarIconRed.svg" alt="Data de Início"> <strong>Data de Início:</strong></p>
+        <p>{{ obra.dataInicio | date:'shortDate' }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/calendarIconRed.svg" alt="Data de Término"> <strong>Data de Término:</strong></p>
+        <p>{{ obra.dataTermino | date:'shortDate' }}</p>
+      </div>
+      <div class="info-box">
+        <p><img src="img/redIcons/statusIconRed.svg" alt="Status"> <strong>Status:</strong></p>
+        <p>{{ getStatusName(obra.status) }}</p>
+      </div>
     </div>
 
     <div *ngIf="currentTab === 'Manutenção'" class="detail-section">
