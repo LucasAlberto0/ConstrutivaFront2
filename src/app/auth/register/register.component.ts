@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  registerData: RegisterDto = { email: '', password: '', confirmPassword: '', nomeCompleto: '', role: 'Fiscal' }; // Default role
+  registerData: RegisterDto = { email: '', password: '', confirmPassword: '', nomeCompleto: '', role: 'Fiscal' }; 
   roles: ('Admin' | 'Coordenador' | 'Fiscal')[] = ['Admin', 'Coordenador', 'Fiscal'];
 
   private _router = inject(Router);

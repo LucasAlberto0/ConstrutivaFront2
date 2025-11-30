@@ -16,7 +16,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
- @Component({
+@Component({
   selector: 'app-login',
   imports: [CommonModule, RouterLink, FormsModule, ReactiveFormsModule, MatSnackBarModule],
   templateUrl: './login.component.html',
@@ -75,8 +75,6 @@ export class LoginComponent implements OnInit {
       next: (value: { token: string }) => {
         localStorage.setItem('token', value.token);
         this._snackBar.open('Login realizado!', 'Bem-vindo!', { duration: 2500, verticalPosition: 'top' });
-
-
 
         setTimeout(() => {
           this._router.navigateByUrl('/dashboard');

@@ -22,12 +22,12 @@ h1 {
 }
 
 .loading-message {
-  background-color: #e0f2f7; // Light blue
+  background-color: #e0f2f7; 
   color: #0277bd;
 }
 
 .error-message {
-  background-color: #ffebee; // Light red
+  background-color: #ffebee; 
   color: #c62828;
 }
 
@@ -228,6 +228,16 @@ h1 {
   color: #555;
 }
 
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  max-height: 400px;
+  margin: 0 auto 2rem auto;
+}
+
 @media (max-width: 768px) {
   .main-title{
     flex-direction: column;
@@ -247,7 +257,6 @@ h1 {
   
 }
 
-/* Responsive adjustments for smaller screens */
 @media (max-width: 320px) {
   .dashboard-container {
     padding: 0.5rem;
@@ -258,7 +267,7 @@ h1 {
   }
 
   .summary-cards {
-    grid-template-columns: 1fr; // Stack cards on very small screens
+    grid-template-columns: 1fr; 
   }
 
   .card h3 {

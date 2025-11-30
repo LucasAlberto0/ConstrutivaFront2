@@ -2,12 +2,12 @@
   display: flex;
   min-height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: #f0f2f5; // Light gray background
+  background-color: #f0f2f5; 
 }
 
 .content-section {
-  flex: 3; // 60% of the width
-  background-color: #e53935; // Red theme
+  flex: 3; 
+  background-color: #e53935; 
   color: white;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
 }
 
 .form-section {
-  flex: 2; // 40% of the width
+  flex: 2; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
 
 .login-card {
   width: 100%;
-  max-width: 400px; // Max width for the form itself
+  max-width: 400px; 
   padding: 0rem 2rem 1rem 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -87,15 +87,15 @@ input[type="password"] {
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  border-color: #ef4444; // Red focus border
+  border-color: #ef4444; 
   outline: none;
-  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2); // Red focus shadow
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
 }
 
 .btn-primary {
   width: 100%;
   padding: 0.8rem;
-  background-color: #e53935; // Red theme
+  background-color: #e53935; 
   color: white;
   border: none;
   border-radius: 4px;
@@ -106,7 +106,7 @@ input[type="password"]:focus {
 }
 
 .btn-primary:hover {
-  background-color: #c62828; // Darker red on hover
+  background-color: #c62828; 
 }
 
 .error-message {
@@ -130,7 +130,7 @@ input[type="password"]:focus {
 .register-link {
   display: block;
   margin-top: 1rem;
-  color: #e53935; // Red theme
+  color: #e53935; 
   text-decoration: none;
   font-size: 0.9rem;
 }
@@ -141,11 +141,10 @@ input[type="password"]:focus {
 
 @media (max-width: 900px){
   .content-section {
-    display: none; // Hide content section on small screens
+    display: none; 
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .marketing-phrase h1 {
     font-size: 2rem;
@@ -158,11 +157,11 @@ input[type="password"]:focus {
 
 @media (max-width: 320px) {
   .form-section {
-    flex: 1; // Take full width
+    flex: 1; 
   }
 
   .login-card {
-    box-shadow: none; // Remove shadow on very small screens
+    box-shadow: none;
     padding: 1rem;
   }
 }
