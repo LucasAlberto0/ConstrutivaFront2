@@ -1,4 +1,23 @@
 <div class="dashboard-container">
+
+  <div *ngIf="userInfo" class="user-welcome-banner">
+    <div class="profile-pic-container">
+      <img *ngIf="userInfo.profilePictureUrl" [src]="userInfo.profilePictureUrl" alt="Foto de Perfil" class="profile-pic">
+      <div *ngIf="!userInfo.profilePictureUrl" class="profile-pic-initials">
+        <span>{{ userInfo.nomeCompleto.charAt(0) }}</span>
+      </div>
+      <button class="btn-change-pic" (click)="fileInput.click()" title="Alterar foto de perfil">
+        <img src="img/editIcon.svg" alt="Editar">
+      </button>
+      <input hidden type="file" #fileInput accept="image/*" (change)="onProfilePictureSelected($event)">
+    </div>
+    <div class="user-details">
+      <h2>Bem-vindo de volta, <span>{{ userInfo.nomeCompleto }}!</span></h2>
+      <p>{{ userInfo.email }} | Perfil: <strong>{{ userInfo.roles[0] }}</strong></p>
+    </div>
+    <div *ngIf="uploadingPicture" class="upload-spinner"></div>
+  </div>
+
   <h1>Dashboard</h1>
 
   <div *ngIf="loading" class="loading-message">Loading dashboard data...</div>

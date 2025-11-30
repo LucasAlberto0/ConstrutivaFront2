@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { LoginDto, RegisterDto } from './models/auth.model';
+import { UserInfo } from './models/user.model';
 import { jwtDecode } from 'jwt-decode'; // Added import
 
 interface DecodedToken { // Define interface for decoded token
@@ -43,6 +44,17 @@ export class AuthService {
 
   register(userData: RegisterDto): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/Auth/register`, userData);
+  }
+
+  getMe(): Observable<UserInfo> {
+    return this.http.get<UserInfo>(`${this.apiUrl}/api/Auth/me`);
+  }
+
+  uploadProfilePicture(file: File): Observable<{ profilePictureUrl: string }> {
+    const formData = new FormData();
+    formData.append('profilePicture', file);
+
+    return this.http.post<{ profilePictureUrl: string }>(`${this.apiUrl}/api/users/me/profile-picture`, formData);
   }
 
   logout(): void {

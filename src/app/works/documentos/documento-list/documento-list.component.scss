@@ -38,6 +38,48 @@ h3 {
   color: #757575;
 }
 
+.upload-area {
+  border: 2px dashed #9490909f;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.upload-area:hover {
+  border-color: #e53935; /* Red */
+}
+
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-attach {
+  background-color: #e53935; /* Red */
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-attach:hover {
+  background-color: #c62828; /* Darker red */
+}
+
+.upload-info {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
 .documento-form {
   margin-bottom: 2rem;
 }

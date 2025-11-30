@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DocumentoService } from '../../../shared/documento.service';
-import { DocumentoListagemDto, DocumentoCriacaoDto } from '../../../shared/models/documento.model';
+import { DocumentoListagemDto } from '../../../shared/models/documento.model';
 import { TipoPasta } from '../../../shared/models/obra.model';
 import { AuthService } from '../../../shared/auth.service'; // Added import
 
@@ -19,12 +19,6 @@ export class DocumentoListComponent implements OnInit {
   @Output() documentoAdded = new EventEmitter<void>();
   @Output() documentoDeleted = new EventEmitter<void>();
 
-  newDocumento: DocumentoCriacaoDto = {
-    nomeArquivo: '',
-    url: '',
-    pasta: TipoPasta.Outros,
-    obraId: 0
-  };
   loading: boolean = false;
   error: string | null = null;
   tipoPastaOptions = Object.values(TipoPasta).filter(value => typeof value === 'number');
@@ -33,35 +27,18 @@ export class DocumentoListComponent implements OnInit {
   constructor(private documentoService: DocumentoService, private authService: AuthService) { } // Injected AuthService
 
   ngOnInit(): void {
-    this.newDocumento.obraId = this.obraId;
     this.canManageDocumentos = this.authService.hasRole(['Admin', 'Coordenador']); // Initialize canManageDocumentos
   }
 
-  addDocumento(): void {
-    if (!this.newDocumento.nomeArquivo || !this.newDocumento.url) {
-      this.error = 'Nome do arquivo e URL são obrigatórios.';
-      return;
-    }
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
 
-    this.loading = true;
-    this.error = null;
-    this.documentoService.createDocumento(this.obraId, this.newDocumento).subscribe({
-      next: () => {
-        this.newDocumento = {
-          nomeArquivo: '',
-          url: '',
-          pasta: TipoPasta.Outros,
-          obraId: this.obraId
-        };
-        this.documentoAdded.emit();
-        this.loading = false;
-      },
-      error: (err) => {
-        this.error = 'Falha ao adicionar documento.';
-        this.loading = false;
-        console.error('Erro ao adicionar documento:', err);
-      }
-    });
+    if (file) {
+      console.log('Selected file:', file);
+      // Here you would typically call a service to upload the file.
+      // For now, we'll just log it.
+      // Example: this.documentoService.upload(this.obraId, file).subscribe(...)
+    }
   }
 
   deleteDocumento(documentoId: number | undefined): void {

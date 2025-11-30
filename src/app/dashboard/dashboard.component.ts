@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { Chart } from 'chart.js/auto';
 import { DashboardService } from '../shared/dashboard.service';
 import { DashboardSummaryDto } from '../shared/models/dashboard.model';
+import { AuthService } from '../shared/auth.service';
+import { UserInfo } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,18 +16,56 @@ import { DashboardSummaryDto } from '../shared/models/dashboard.model';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
   dashboardSummary: DashboardSummaryDto | null = null;
+  userInfo: UserInfo | null = null;
   loading: boolean = true;
   error: string | null = null;
   statusChart: any = null;
+  uploadingPicture: boolean = false;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     this.getDashboardSummary();
+    this.getUserInfo();
   }
 
   ngAfterViewInit(): void {
     this.createStatusChart();
+  }
+
+  getUserInfo(): void {
+    this.authService.getMe().subscribe({
+      next: (user) => {
+        this.userInfo = user;
+      },
+      error: (err) => {
+        console.error('Failed to load user info:', err);
+      }
+    });
+  }
+
+  onProfilePictureSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.uploadingPicture = true;
+      this.authService.uploadProfilePicture(file).subscribe({
+        next: (response) => {
+          if (this.userInfo) {
+            this.userInfo.profilePictureUrl = response.profilePictureUrl;
+          }
+          this.uploadingPicture = false;
+        },
+        error: (err) => {
+          console.error('Failed to upload profile picture:', err);
+          this.uploadingPicture = false;
+          // Optionally: show an error message to the user
+        }
+      });
+    }
   }
 
   getDashboardSummary(): void {
