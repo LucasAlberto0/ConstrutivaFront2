@@ -1,30 +1,54 @@
 <div class="documento-list-container">
-  <h3>Documentos da Obra</h3>
+  <h2>Documentos da Obra {{ obraId }}</h2>
 
-  <div *ngIf="loading" class="loading-message">Processando...</div>
-  <div *ngIf="error" class="error-message">{{ error }}</div>
-
-  <div *ngIf="canManageDocumentos" class="upload-area" (click)="fileInput.click()">
-    <input hidden type="file" #fileInput (change)="onFileSelected($event)">
+  <div class="upload-area">
     <div class="upload-content">
-      <button class="btn-attach">Anexar Arquivo</button>
-      <p class="upload-info">Tamanho máximo: 5MB. Tipos suportados: PDF, DOCX, XLSX.</p>
+      <input type="file" (change)="onFileSelected($event)" #fileInput>
+      <button class="btn-attach" (click)="onUpload()" [disabled]="!selectedFile">Anexar Documento</button>
+      <div *ngIf="uploadProgress > 0 && uploadProgress < 100">
+        Progresso do Upload: {{ uploadProgress }}%
+      </div>
+      <div *ngIf="uploadProgress === 100">
+        Upload Concluído!
+      </div>
+      <p class="upload-info">Arraste e solte arquivos aqui ou clique para selecionar.</p>
     </div>
   </div>
 
-  <div class="card documentos-display">
-    <h4>Documentos Registrados</h4>
-    <ul>
-      <li *ngFor="let documento of documentos">
-        <span>
-          <a [href]="documento.url" target="_blank">{{ documento.nomeArquivo }}</a> ({{ getPastaName(documento.pasta) }})
-        </span>
-        <button *ngIf="canManageDocumentos" (click)="deleteDocumento(documento.id)" class="btn-delete">Excluir</button>
-      </li>
-    </ul>
+  <div *ngIf="documentos.length > 0; else noDocuments" class="document-folders">
+    <div *ngFor="let folderName of (groupedDocuments | keyvalue)" class="folder-box">
+      <h3>{{ folderName.key }}</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Tamanho</th>
+            <th>Data de Anexação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let documento of folderName.value">
+            <td>{{ documento.id }}</td>
+            <td>{{ documento.nome }}</td>
+            <td>{{ documento.descricao }}</td>
+            <td>{{ documento.tipo }}</td>
+            <td>{{ formatBytes(documento.tamanhoArquivo) }}</td>
+            <td>{{ documento.dataAnexamento | date:'shortDate' }}</td>
+            <td>
+              <button (click)="onDownload(documento)">Download</button>
+              <!-- Add other actions like edit/delete if needed -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div *ngIf="!documentos || documentos.length === 0 && !loading" class="no-data-message">
-    Nenhum documento registrado para esta obra.
-  </div>
+  <ng-template #noDocuments>
+    <p>Nenhum documento encontrado para esta obra.</p>
+  </ng-template>
 </div>

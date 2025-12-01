@@ -31,4 +31,19 @@ export class DocumentoService {
   deleteDocumento(obraId: number, id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/api/obras/${obraId}/Documentos/${id}`);
   }
+
+  uploadDocumento(obraId: number, documentoId: number, file: File, description: string, type: string): Observable<DocumentoDetalhesDto> {
+    const formData = new FormData();
+    formData.append('Arquivo', file);
+    formData.append('description', description); // Added
+    formData.append('type', type); // Added
+    return this.http.post<DocumentoDetalhesDto>(`${this.apiUrl}/api/obras/${obraId}/Documentos/${documentoId}/anexar`, formData);
+  }
+
+  downloadDocumento(obraId: number, documentoId: number): Observable<Blob> {
+    // Assuming a download endpoint exists, e.g., /api/obras/{obraId}/Documentos/{documentoId}/download
+    // Or it might be the same GET endpoint for details, but returning a file stream
+    // For now, let's assume a dedicated download endpoint
+    return this.http.get(`${this.apiUrl}/api/obras/${obraId}/Documentos/${documentoId}/download`, { responseType: 'blob' });
+  }
 }
