@@ -8,6 +8,7 @@ export const routes: Routes = [
   { path: 'obras/criar', loadComponent: () => import('./works/obra-create/obra-create.component').then(m => m.ObraCreateComponent), canActivate: [AuthGuard] },
   { path: 'obras', loadComponent: () => import('./works/obra-list/obra-list.component').then(m => m.ObraListComponent), canActivate: [AuthGuard] },
   { path: 'obras/:id', loadComponent: () => import('./works/obra-detail/obra-detail.component').then(m => m.ObraDetailComponent), canActivate: [AuthGuard] },
+  { path: 'chatbot', loadComponent: () => import('./chatbot/chatbot.component').then(m => m.ChatbotComponent), canActivate: [AuthGuard] },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, // Redirect to dashboard after login
   { path: '**', redirectTo: '/dashboard' } // Wildcard route for a 404 page or redirect to dashboard
 ];

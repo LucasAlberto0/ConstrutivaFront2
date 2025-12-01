@@ -1,0 +1,21 @@
+<div class="chatbot-container">
+  <div class="chat-header">
+    <h2>Assistente Virtual</h2>
+  </div>
+  <div class="chat-messages" #chatMessages>
+    <div *ngFor="let message of messages" class="message-bubble-wrapper" [ngClass]="{'sent': message.isUser, 'received': !message.isUser}">
+      <img *ngIf="!message.isUser" src="img/robotIcon.svg" alt="Assistente" class="message-avatar received-avatar">
+      <div class="message-bubble">
+        <p>{{ message.text }}</p>
+        <span class="message-time">{{ message.timestamp | date:'shortTime' }}</span>
+      </div>
+      <img *ngIf="message.isUser" [src]="userProfilePicUrl || 'img/userIcon.svg'" alt="Você" class="message-avatar sent-avatar">
+    </div>
+  </div>
+  <div class="chat-input">
+    <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Digite sua mensagem...">
+    <button (click)="sendMessage()">
+      <img src="img/sendIcon.svg" alt="Enviar">
+    </button>
+  </div>
+</div>

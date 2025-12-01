@@ -33,4 +33,9 @@ export class AppComponent implements OnInit {
     const currentUrl = this.router.url;
     return !currentUrl.includes('/login') && !currentUrl.includes('/register');
   }
+
+  shouldApplyContainerClass(): boolean {
+    const currentUrl = this.router.url;
+    return !currentUrl.includes('/chatbot');
+  }
 }

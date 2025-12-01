@@ -3,6 +3,7 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%; /* Ensure html and body take full height */
   font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 

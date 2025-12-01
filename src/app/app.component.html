@@ -1,4 +1,4 @@
 <app-header *ngIf="shouldShowHeader()"></app-header>
-<div [class.container]="shouldShowHeader()">
+<div [class.container]="shouldApplyContainerClass()">
   <router-outlet></router-outlet>
 </div>
