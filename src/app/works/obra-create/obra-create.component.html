@@ -5,55 +5,55 @@
     </div>
     <form [formGroup]="obraForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="nome">Nome da Obra</label>
+        <label for="nome"><img src="img/redIcons/nameIconRed.svg" alt="Nome"> Nome da Obra</label>
         <input id="nome" formControlName="nome" placeholder="Nome da Obra">
       </div>
       <div class="form-group">
-        <label for="localizacao">Localização</label>
+        <label for="localizacao"><img src="img/localIcon.svg" alt="Localização"> Localização</label>
         <input id="localizacao" formControlName="localizacao" placeholder="Localização">
       </div>
       <div class="form-group">
-        <label for="contratante">Contratante</label>
+        <label for="contratante"><img src="img/redIcons/contractIconRed.svg" alt="Contratante"> Contratante</label>
         <input id="contratante" formControlName="contratante" placeholder="Contratante">
       </div>
       <div class="form-group">
-        <label for="contrato">Contrato</label>
+        <label for="contrato"><img src="img/redIcons/contractIconRed.svg" alt="Contrato"> Contrato</label>
         <input id="contrato" formControlName="contrato" placeholder="Contrato">
       </div>
       <div class="form-group">
-        <label for="ordemInicioServico">Ordem de Início de Serviço</label>
+        <label for="ordemInicioServico"><img src="img/redIcons/contractIconRed.svg" alt="Ordem de Início de Serviço"> Ordem de Início de Serviço</label>
         <input id="ordemInicioServico" formControlName="ordemInicioServico" placeholder="Ordem de Início de Serviço">
       </div>
       <div class="form-group">
-        <label for="coordenadorNome">Nome do Coordenador</label>
+        <label for="coordenadorNome"><img src="img/redIcons/coordinatorIconRed.svg" alt="Coordenador"> Nome do Coordenador</label>
         <input id="coordenadorNome" formControlName="coordenadorNome" placeholder="Nome do Coordenador">
       </div>
       <div class="form-group">
-        <label for="administradorNome">Nome do Administrador</label>
+        <label for="administradorNome"><img src="img/redIcons/admIconRed.svg" alt="Administrador"> Nome do Administrador</label>
         <input id="administradorNome" formControlName="administradorNome" placeholder="Nome do Administrador">
       </div>
       <div class="form-group">
-        <label for="responsavelTecnicoNome">Nome do Responsável Técnico</label>
+        <label for="responsavelTecnicoNome"><img src="img/redIcons/engineerIconRed.svg" alt="Responsável Técnico"> Nome do Responsável Técnico</label>
         <input id="responsavelTecnicoNome" formControlName="responsavelTecnicoNome" placeholder="Nome do Responsável Técnico">
       </div>
       <div class="form-group">
-        <label for="equipe">Equipe</label>
+        <label for="equipe"><img src="img/redIcons/teamIconRed.svg" alt="Equipe"> Equipe</label>
         <input id="equipe" formControlName="equipe" placeholder="Equipe">
       </div>
       <div class="form-group">
-        <label for="dataInicio">Data de Início</label>
+        <label for="dataInicio"><img src="img/redIcons/calendarIconRed.svg" alt="Data de Início"> Data de Início</label>
         <input id="dataInicio" type="date" formControlName="dataInicio">
       </div>
       <div class="form-group">
-        <label for="dataTermino">Data de Término</label>
+        <label for="dataTermino"><img src="img/redIcons/calendarIconRed.svg" alt="Data de Término"> Data de Término</label>
         <input id="dataTermino" type="date" formControlName="dataTermino">
       </div>
       <div class="form-group">
-        <label for="observacoes">Observações</label>
+        <label for="observacoes"><img src="img/redIcons/clipboardIconRed.svg" alt="Observações"> Observações</label>
         <textarea id="observacoes" formControlName="observacoes" placeholder="Observações"></textarea>
       </div>
       <div class="form-group">
-        <label for="status">Status</label>
+        <label for="status"><img src="img/redIcons/statusIconRed.svg" alt="Status"> Status</label>
         <select id="status" formControlName="status">
           <option *ngFor="let status of statuses" [value]="status.value">
             {{ status.name }}
