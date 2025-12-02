@@ -24,6 +24,7 @@
     <button (click)="selectTab('Manutenção')" [class.active]="currentTab === 'Manutenção'">Manutenção</button>
     <button (click)="selectTab('Diário')" [class.active]="currentTab === 'Diário'">Diário</button>
     <button (click)="selectTab('Documentos')" [class.active]="currentTab === 'Documentos'">Documentos</button>
+    <button (click)="navigateToChecklists()" [class.active]="currentTab === 'Checklists'">Checklists</button>
   </div>
 
   <div *ngIf="loading" class="loading-message">Carregando detalhes da obra...</div>
@@ -119,6 +120,10 @@
         (documentoAdded)="refreshDocumentos()"
         (documentoDeleted)="refreshDocumentos()">
       </app-documento-list>
+    </div>
+
+    <div *ngIf="currentTab === 'Checklists'" class="detail-section">
+      <app-checklists-page [obraId]="obra.id!"></app-checklists-page>
     </div>
   </div>
 </div>

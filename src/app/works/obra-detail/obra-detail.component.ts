@@ -7,11 +7,18 @@ import { ManutencaoListComponent } from '../manutencoes/manutencao-list/manutenc
 import { DiarioListComponent } from '../diarios/diario-list/diario-list.component';
 import { DocumentoListComponent } from '../documentos/documento-list/documento-list.component';
 import { AuthService } from '../../shared/auth.service';
+import { ChecklistsPageComponent } from '../checklists-page/checklists-page.component';
 
 @Component({
   selector: 'app-obra-detail',
   standalone: true,
-  imports: [CommonModule, ManutencaoListComponent, DiarioListComponent, DocumentoListComponent],
+  imports: [
+    CommonModule,
+    ManutencaoListComponent,
+    DiarioListComponent,
+    DocumentoListComponent,
+    ChecklistsPageComponent // Add ChecklistsPageComponent here
+  ],
   templateUrl: './obra-detail.component.html',
   styleUrls: ['./obra-detail.component.scss']
 })
@@ -133,6 +140,13 @@ export class ObraDetailComponent implements OnInit {
           console.error('Failed to delete obra:', err);
         }
       });
+    }
+  }
+
+  navigateToChecklists(): void {
+    if (this.obraId) {
+      this.currentTab = 'Checklists'; // Set the current tab to 'Checklists'
+      // Removed this.router.navigate() as checklists will be displayed as a tab
     }
   }
 

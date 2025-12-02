@@ -1,0 +1,40 @@
+<div class="checklists-page-container">
+  <h2>Checklists para Obra ID:</h2>
+
+  <div class="checklist-options">
+    <button (click)="toggleChecklist('inicio')" class="btn-checklist" [class.active]="showInicioObraChecklist">Checklist de Início de Obra</button>
+    <button (click)="toggleChecklist('entrega')" class="btn-checklist" [class.active]="showEntregaObraChecklist">Checklist de Entrega de Obra</button>
+  </div>
+
+  <div *ngIf="showInicioObraChecklist" class="checklist-container">
+    <h4>Checklist de Início de Obra</h4>
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="getInicioObraProgress()"></div>
+    </div>
+    <p>{{ getInicioObraProgress() | number:'1.0-0' }}% Concluído</p>
+    <div *ngFor="let item of inicioObraChecklist; let i = index" class="checklist-item">
+      <div class="custom-checkbox">
+        <input type="checkbox" id="inicio-{{i}}" [(ngModel)]="item.completed" (change)="calculateProgress('inicio')">
+        <label for="inicio-{{i}}"></label>
+      </div>
+      <label for="inicio-{{i}}">{{ item.name }}</label>
+    </div>
+    <button class="btn-save-checklist" (click)="saveChecklist('inicio')">Salvar Checklist de Início</button>
+  </div>
+
+  <div *ngIf="showEntregaObraChecklist" class="checklist-container">
+    <h4>Checklist de Entrega de Obra</h4>
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width.%]="getEntregaObraProgress()"></div>
+    </div>
+    <p>{{ getEntregaObraProgress() | number:'1.0-0' }}% Concluído</p>
+    <div *ngFor="let item of entregaObraChecklist; let i = index" class="checklist-item">
+      <div class="custom-checkbox">
+        <input type="checkbox" id="entrega-{{i}}" [(ngModel)]="item.completed" (change)="calculateProgress('entrega')">
+        <label for="entrega-{{i}}"></label>
+      </div>
+      <label for="entrega-{{i}}">{{ item.name }}</label>
+    </div>
+    <button class="btn-save-checklist" (click)="saveChecklist('entrega')">Salvar Checklist de Entrega</button>
+  </div>
+</div>
