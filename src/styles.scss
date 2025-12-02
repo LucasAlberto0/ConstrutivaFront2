@@ -4,39 +4,15 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%; /* Ensure html and body take full height */
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
+  color: #333; /* Using $color-dark from landing page */
+  line-height: 1.6;
+  background-color: #fff; /* Using $color-light from landing page */
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
-}
-
-/* Global Button Styles */
-button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px; /* Slightly more rounded */
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid transparent; /* Default transparent border */
-  font-family: inherit; /* Inherit font from body */
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* Primary Button Style */
-.btn-primary {
-  background-color: #e53935; /* Red */
-  color: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.btn-primary:hover {
-  background-color: #c62828; /* Darker red */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 /* Global Button Styles */
@@ -141,14 +117,6 @@ button:hover {
 .btn-close:hover {
   background-color: #e9ecef;
   color: #333;
-}
-
-/* Global Card Style */
-.card {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 12px; /* More rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Stronger, softer shadow */
 }
 
 .custom-tab-menu {
