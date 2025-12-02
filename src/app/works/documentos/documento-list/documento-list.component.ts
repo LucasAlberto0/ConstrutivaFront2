@@ -21,6 +21,7 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
   selectedFile: File | null = null;
   uploadProgress: number = 0;
+  selectedFolder: string = ''; // Added for folder selection
   groupedDocuments: { [key: string]: DocumentoListagemDto[] } = {}; // Added for grouping
 
   constructor(
@@ -78,7 +79,7 @@ export class DocumentoListComponent implements OnInit, OnChanges {
     }
 
     const documentDescription = `Documento anexado para obra ${this.obraId}`;
-    const documentType = 'Geral'; // Default type, can be made dynamic later
+    const documentType = this.selectedFolder || 'Outros'; // Use selected folder or default to 'Outros'
 
     // Step 1: Create a document entry with basic info, providing a placeholder for caminhoArquivo
     const newDocumento: DocumentoCriacaoDto = {

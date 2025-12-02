@@ -4,6 +4,11 @@
   <div class="upload-area">
     <div class="upload-content">
       <input type="file" (change)="onFileSelected($event)" #fileInput>
+      <select [(ngModel)]="selectedFolder" class="folder-select">
+        <option value="" disabled selected>Selecione a pasta</option>
+        <option value="Contratos">Contratos</option>
+        <option value="Relatorios">Relatórios</option>        <option value="Diarios">Diários</option>
+      </select>
       <button class="btn-attach" (click)="onUpload()" [disabled]="!selectedFile">Anexar Documento</button>
       <div *ngIf="uploadProgress > 0 && uploadProgress < 100">
         Progresso do Upload: {{ uploadProgress }}%
@@ -18,33 +23,19 @@
   <div *ngIf="documentos.length > 0; else noDocuments" class="document-folders">
     <div *ngFor="let folderName of (groupedDocuments | keyvalue)" class="folder-box">
       <h3>{{ folderName.key }}</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Tamanho</th>
-            <th>Data de Anexação</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let documento of folderName.value">
-            <td>{{ documento.id }}</td>
-            <td>{{ documento.nome }}</td>
-            <td>{{ documento.descricao }}</td>
-            <td>{{ documento.tipo }}</td>
-            <td>{{ formatBytes(documento.tamanhoArquivo) }}</td>
-            <td>{{ documento.dataAnexamento | date:'shortDate' }}</td>
-            <td>
-              <button (click)="onDownload(documento)">Download</button>
-              <!-- Add other actions like edit/delete if needed -->
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="document-list">
+        <div *ngFor="let documento of folderName.value" class="document-item">
+          <div class="document-info">
+            <span class="document-name">{{ documento.nome }}</span>
+            <span class="document-size">{{ formatBytes(documento.tamanhoArquivo) }}</span>
+            <span class="document-date">{{ documento.dataAnexamento | date:'shortDate' }}</span>
+          </div>
+          <div class="document-actions">
+            <button (click)="onDownload(documento)">Download</button>
+            <!-- Add other actions like edit/delete if needed -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
