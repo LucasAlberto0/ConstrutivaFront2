@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { DiarioService } from '../../../shared/diario.service';
 import { DiarioObraListagemDto, DiarioObraCriacaoDto, ComentarioCriacaoDto, Clima } from '../../../shared/models/diario.model';
 import { AuthService } from '../../../shared/auth.service'; // Added import
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
 
 @Component({
   selector: 'app-diario-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule],
   templateUrl: './diario-list.component.html',
   styleUrls: ['./diario-list.component.scss']
 })
@@ -35,10 +36,10 @@ export class DiarioListComponent implements OnInit {
   currentDiarioDetalhes: any = null; // To store details of a selected diario
   currentDiarioPhotoUrl: string | undefined; // To store the URL of the photo
   loading: boolean = false;
-  error: string | null = null;
+  // error: string | null = null; // Removed error property
   canManageDiarios: boolean = false; // Added property
 
-  constructor(private diarioService: DiarioService, private authService: AuthService) { } // Injected AuthService
+  constructor(private diarioService: DiarioService, private authService: AuthService, private snackBar: MatSnackBar) { } // Injected MatSnackBar
 
   ngOnInit(): void {
     this.newDiario.obraId = this.obraId;
@@ -57,12 +58,12 @@ export class DiarioListComponent implements OnInit {
 
   addDiario(): void {
     if (!this.newDiario.data || !this.newDiario.clima || !this.newDiario.descricaoAtividades) {
-      this.error = 'Data, Clima e Atividades são obrigatórios para o diário.';
+      this.snackBar.open('Data, Clima e Atividades são obrigatórios para o diário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       return;
     }
 
     this.loading = true;
-    this.error = null;
+    // this.error = null; // Removed error assignment
 
     const diarioToCreate: DiarioObraCriacaoDto = {
       ...this.newDiario,
@@ -84,9 +85,10 @@ export class DiarioListComponent implements OnInit {
         this.selectedFile = undefined;
         this.diarioAdded.emit();
         this.loading = false;
+        this.snackBar.open('Diário de obra adicionado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
       error: (err) => {
-        this.error = 'Falha ao adicionar diário de obra.';
+        this.snackBar.open('Falha ao adicionar diário de obra.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
         console.error('Erro ao adicionar diário:', err);
       }
@@ -99,14 +101,15 @@ export class DiarioListComponent implements OnInit {
     }
 
     this.loading = true;
-    this.error = null;
+    // this.error = null; // Removed error assignment
     this.diarioService.deleteDiario(this.obraId, diarioId).subscribe({
       next: () => {
         this.diarioDeleted.emit();
         this.loading = false;
+        this.snackBar.open('Diário de obra excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
       error: (err) => {
-        this.error = 'Falha ao excluir diário de obra.';
+        this.snackBar.open('Falha ao excluir diário de obra.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
         console.error('Erro ao excluir diário:', err);
       }
@@ -117,7 +120,7 @@ export class DiarioListComponent implements OnInit {
     if (!diarioId) return;
 
     this.loading = true;
-    this.error = null;
+    // this.error = null; // Removed error assignment
     this.currentDiarioPhotoUrl = undefined; // Clear previous photo
 
     this.diarioService.getDiarioById(this.obraId, diarioId).subscribe({
@@ -131,14 +134,14 @@ export class DiarioListComponent implements OnInit {
             },
             error: (photoErr) => {
               console.error('Erro ao carregar foto do diário:', photoErr);
-              this.error = 'Falha ao carregar foto do diário.';
+              this.snackBar.open('Falha ao carregar foto do diário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
             }
           });
         }
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Falha ao carregar detalhes do diário.';
+        this.snackBar.open('Falha ao carregar detalhes do diário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
         console.error('Erro ao carregar detalhes do diário:', err);
       }
@@ -157,7 +160,7 @@ export class DiarioListComponent implements OnInit {
 
   addComentario(diarioId: number | undefined): void {
     if (!diarioId || !this.newComentarioTexto) {
-      this.error = 'Comentário é obrigatório.';
+      this.snackBar.open('Comentário é obrigatório.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       return;
     }
 
@@ -168,15 +171,16 @@ export class DiarioListComponent implements OnInit {
     };
 
     this.loading = true;
-    this.error = null;
+    // this.error = null; // Removed error assignment
     this.diarioService.addComentarioToDiario(this.obraId, diarioId, comentario).subscribe({
       next: () => {
         this.newComentarioTexto = '';
         this.viewDiarioDetails(diarioId); // Refresh details
         this.loading = false;
+        this.snackBar.open('Comentário adicionado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
       error: (err) => {
-        this.error = 'Falha ao adicionar comentário.';
+        this.snackBar.open('Falha ao adicionar comentário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
         console.error('Erro ao adicionar comentário:', err);
       }
@@ -189,14 +193,15 @@ export class DiarioListComponent implements OnInit {
     }
 
     this.loading = true;
-    this.error = null;
+    // this.error = null; // Removed error assignment
     this.diarioService.deleteComentarioFromDiario(this.obraId, diarioId, comentarioId).subscribe({
       next: () => {
         this.viewDiarioDetails(diarioId); // Refresh details
         this.loading = false;
+        this.snackBar.open('Comentário excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
       },
       error: (err) => {
-        this.error = 'Falha ao excluir comentário.';
+        this.snackBar.open('Falha ao excluir comentário.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         this.loading = false;
         console.error('Erro ao excluir comentário:', err);
       }

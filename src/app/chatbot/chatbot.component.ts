@@ -50,7 +50,7 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
 
     if (this.messages.length === 0) {
       this.messages.push({
-        text: 'Olá! Como posso ajudar você hoje?',
+        text: 'Olá, sou a MP Assist! Como posso ajudar você hoje?',
         timestamp: new Date(),
         isUser: false
       });

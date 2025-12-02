@@ -206,6 +206,15 @@ h3 {
   color: #555;
 }
 
+.close-button:hover {
+  color: #e53935; /* Construtiva Red */
+}
+
+.success-snackbar {
+  background-color: #4CAF50 !important; /* Green background */
+  color: #fff !important; /* White text */
+}
+
 .modal-content h4 {
   color: #e53935;
   margin: 0 0 1rem;

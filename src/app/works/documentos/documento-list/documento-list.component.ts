@@ -5,11 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpEventType } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar
 
 @Component({
   selector: 'app-documento-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatSnackBarModule],
   templateUrl: './documento-list.component.html',
   styleUrl: './documento-list.component.scss'
 })
@@ -27,7 +28,8 @@ export class DocumentoListComponent implements OnInit, OnChanges {
   constructor(
     private documentoService: DocumentoService,
     private route: ActivatedRoute, // Keep for potential future use or if component can be used standalone
-    private router: Router // Keep for potential future use or if component can be used standalone
+    private router: Router, // Keep for potential future use or if component can be used standalone
+    private snackBar: MatSnackBar // Inject MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -74,7 +76,7 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
   onUpload(): void {
     if (!this.selectedFile || !this.obraId) {
-      console.warn('No file selected or Obra ID is missing.');
+      this.snackBar.open('Nenhum arquivo selecionado ou ID da obra ausente.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       return;
     }
 
@@ -103,10 +105,12 @@ export class DocumentoListComponent implements OnInit, OnChanges {
                 this.selectedFile = null;
                 this.uploadProgress = 0;
                 this.documentoAdded.emit(); // Notify parent to refresh documents
+                this.snackBar.open('Documento enviado com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
               }
             },
             error: (uploadErr) => {
-              console.error('Error uploading file', uploadErr);
+              console.error('Erro ao fazer upload do arquivo', uploadErr);
+              this.snackBar.open('Erro ao fazer upload do arquivo.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
               // Optionally, delete the created document entry if upload fails
               if (createdDocumento.id) {
                 this.documentoService.deleteDocumento(this.obraId, createdDocumento.id).subscribe(() => {
@@ -118,7 +122,8 @@ export class DocumentoListComponent implements OnInit, OnChanges {
         }
       },
       error: (createErr) => {
-        console.error('Error creating document entry', createErr);
+        console.error('Erro ao criar entrada do documento', createErr);
+        this.snackBar.open('Erro ao criar entrada do documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       }
     });
   }
@@ -136,7 +141,8 @@ export class DocumentoListComponent implements OnInit, OnChanges {
           URL.revokeObjectURL(objectUrl);
         },
         error: (err) => {
-          console.error('Error downloading document', err);
+          console.error('Erro ao baixar documento', err);
+          this.snackBar.open('Erro ao baixar documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
         }
       });
     }
@@ -156,7 +162,8 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
   onDelete(documento: DocumentoListagemDto): void {
     if (!documento.id || !this.obraId) {
-      console.error('Document ID or Obra ID is missing for deletion.');
+      console.error('ID do documento ou ID da obra ausente para exclusão.');
+      this.snackBar.open('ID do documento ou ID da obra ausente para exclusão.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
       return;
     }
 
@@ -165,9 +172,11 @@ export class DocumentoListComponent implements OnInit, OnChanges {
         next: () => {
           console.log(`Documento ${documento.nome} excluído com sucesso.`);
           this.documentoDeleted.emit(); // Notify parent to refresh documents
+          this.snackBar.open('Documento excluído com sucesso!', 'Fechar', { duration: 3000, panelClass: ['success-snackbar'], verticalPosition: 'top' });
         },
         error: (err) => {
           console.error('Erro ao excluir documento:', err);
+          this.snackBar.open('Erro ao excluir documento.', 'Fechar', { duration: 3000, verticalPosition: 'top' });
           // Optionally, display an error message to the user
         }
       });
