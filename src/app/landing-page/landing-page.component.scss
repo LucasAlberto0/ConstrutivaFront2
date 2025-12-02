@@ -65,13 +65,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px 20px;
     border-bottom: 1px solid $color-border;
 }
 
 .logo {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     line-height: 1.2;
 
     &-mp {
@@ -80,10 +81,21 @@ header {
         color: #000;
     }
 
+    .logo-text {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
     &-sub {
         font-size: 0.8em;
         color: #888;
         font-weight: 400;
+    }
+
+    .header-logo {
+        width: 50px;
+        margin-right: 10px;
     }
 }
 
@@ -273,6 +285,22 @@ hr {
             font-weight: 600;
             color: $color-dark;
         }
+
+        .icon-box {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border: 2px solid $color-border;
+            border-radius: 8px;
+            margin: 0 auto 20px;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
+        }
     }
 }
 
@@ -321,8 +349,14 @@ hr {
             width: 60px;
             height: 60px;
             margin: 0 auto 15px;
-            border-radius: 50%;
-            border: 2px solid $color-primary;
+            border-radius: 8px;
+            border: 2px solid $color-border;
+            background-color: transparent;
+
+            img {
+                width: 40px;
+                height: 40px;
+            }
         }
 
         h3 {
@@ -373,21 +407,4 @@ footer {
     }
 }
 
-.icon::before {
-    content: ' ';
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin-bottom: 10px;
-    border-radius: 50%;
-    background-color: #ED213C;
-}
-.card .icon-checklist::before { background-color: #555; }
-.card .icon-cronograma::before { background-color: #333; }
-/* Ajuste para ícones de Benefício serem vermelhos e pequenos */
-.beneficio .icon::before {
-    background-color: #ED213C;
-    width: 25px;
-    height: 25px;
-    margin-bottom: 0;
-}
+
