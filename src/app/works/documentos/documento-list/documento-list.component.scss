@@ -427,6 +427,11 @@ h3 {
   color: #666;
 }
 
+.document-actions {
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+
 .document-actions button {
   background-color: #000; /* Changed to black */
   color: white;
@@ -449,6 +454,14 @@ h3 {
 
 .document-actions button:hover {
   background-color: #333; /* Darker black on hover */
+}
+
+.btn-delete-document {
+  background-color: #ef4444; /* Red for delete */
+
+  &:hover {
+    background-color: #dc2626; /* Darker red on hover */
+  }
 }
 
 /* Responsive adjustments for document items */

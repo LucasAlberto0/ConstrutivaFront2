@@ -32,11 +32,11 @@
           <div class="document-info">
             <span class="document-name">{{ documento.nome }}</span>
             <span class="document-size">{{ formatBytes(documento.tamanhoArquivo) }}</span>
-            <span class="document-date">{{ documento.dataAnexamento | date:'shortDate' }}</span>
+            <span class="document-date">{{ documento.dataAnexamento | date:'dd/MM/yyyy' }}</span>
           </div>
           <div class="document-actions">
             <button (click)="onDownload(documento)"><img src="img/saveIcon.svg" alt=""> Download</button>
-            <!-- Add other actions like edit/delete if needed -->
+            <button class="btn-delete-document" (click)="onDelete(documento)"><img src="img/trashIcon.svg" alt=""> Deletar</button>
           </div>
         </div>
       </div>

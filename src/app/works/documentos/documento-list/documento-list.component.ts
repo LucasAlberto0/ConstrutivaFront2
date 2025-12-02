@@ -153,4 +153,24 @@ export class DocumentoListComponent implements OnInit, OnChanges {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
+
+  onDelete(documento: DocumentoListagemDto): void {
+    if (!documento.id || !this.obraId) {
+      console.error('Document ID or Obra ID is missing for deletion.');
+      return;
+    }
+
+    if (confirm(`Tem certeza que deseja excluir o documento "${documento.nome}"?`)) {
+      this.documentoService.deleteDocumento(this.obraId, documento.id).subscribe({
+        next: () => {
+          console.log(`Documento ${documento.nome} excluído com sucesso.`);
+          this.documentoDeleted.emit(); // Notify parent to refresh documents
+        },
+        error: (err) => {
+          console.error('Erro ao excluir documento:', err);
+          // Optionally, display an error message to the user
+        }
+      });
+    }
+  }
 }

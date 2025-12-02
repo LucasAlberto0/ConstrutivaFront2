@@ -17,9 +17,13 @@
       </div>
       <div class="form-group">
         <label for="foto">Foto (Opcional)</label>
-        <input type="file" id="foto" name="foto" (change)="onFileSelected($event)">
+        <div class="file-input-wrapper">
+          <input type="file" id="foto" name="foto" (change)="onFileSelected($event)" #fileInput hidden>
+          <button type="button" class="custom-file-button" (click)="fileInput.click()"><img src="img/uploadIcon.svg" alt=""> Escolher Arquivo</button>
+          <span class="file-name">{{ selectedFile ? selectedFile.name : 'Nenhum arquivo selecionado' }}</span>
+        </div>
       </div>
-      <button type="submit" class="btn-primary">Adicionar Manutenção</button>
+      <button type="submit" class="btn-primary"><img src="img/plusIcon.svg" alt=""> Adicionar Manutenção</button>
     </form>
   </div>
 
@@ -35,7 +39,7 @@
           </div>
         </div>
         <div class="manutencao-actions">
-          <button *ngIf="canManageManutencoes" (click)="deleteManutencao(manutencao.id)" class="btn-danger">Excluir</button>
+          <button *ngIf="canManageManutencoes" (click)="deleteManutencao(manutencao.id)" class="btn-danger"><img src="img/trashIcon.svg" alt=""> Excluir</button>
         </div>
       </li>
     </ul>
